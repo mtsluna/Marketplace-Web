@@ -30,4 +30,9 @@ export class AppComponent {
     })
   }
 
+  logout(){
+    this.tokenService.saveRefreshTokenInStorage('');
+    this.tokenService.saveTokenInStorage('');
+  }
+
 }
