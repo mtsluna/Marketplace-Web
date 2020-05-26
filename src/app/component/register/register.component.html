@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+    </div>
+
+    <div class="col">
+
+      <mat-card class="card">
+        <mat-card-title>Registro</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <form class="example-form" [formGroup]="registerUser">
+
+          <div class="name-container">
+          <table><tr>
+
+          <!-- NAME -->
+          <td><mat-form-field class="example-full-width">
+            <input matInput placeholder="Nombre" formControlName="name"
+                   [errorStateMatcher]="matcher">
+            <mat-hint>Ingrese nombre</mat-hint>
+            <mat-error *ngIf="registerUser.get('name').hasError('required')">
+              Nombre es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field></td>
+
+          <!-- SURNAME -->
+          <td><mat-form-field class="example-full-width">
+            <input matInput placeholder="Apellido" formControlName="surname"
+                   [errorStateMatcher]="matcher">
+            <mat-hint>Ingrese apellido</mat-hint>
+            <mat-error *ngIf="registerUser.get('surname').hasError('required')">
+              Apellido es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field></td>
+
+          </tr></table></div>
+
+
+
+            <!-- DNI -->
+            <mat-form-field class="example-full-width">
+              <input type="number" matInput placeholder="DNI" formControlName="dni"
+                     [errorStateMatcher]="matcher">
+              <mat-hint>Ingrese DNI</mat-hint>
+              <mat-error *ngIf="registerUser.get('dni').hasError('required')">
+                DNI es <strong>requerido</strong>
+              </mat-error>
+              <mat-error *ngIf="registerUser.get('dni').hasError('maxlength')">
+                Debe tener menos de <strong>10 caracteres</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- USERNAME -->
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Nombre de usuario" formControlName="username"
+                     [errorStateMatcher]="matcher">
+              <mat-hint>Ingrese nombre de usuario</mat-hint>
+              <mat-error *ngIf="registerUser.get('username').hasError('required')">
+                Nombre de usuario es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- PASSWORD -->
+            <mat-form-field class="example-full-width" >
+              <input matInput placeholder="Contraseña" formControlName="password"
+                     [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+              <mat-hint>Ingrese contraseña</mat-hint>
+              <mat-error *ngIf="registerUser.get('password').hasError('required')">
+                Contraseña es <strong>requerida</strong>
+              </mat-error>
+              <mat-error *ngIf="registerUser.get('password').hasError('minlength')">
+                Debe tener mas de <strong>6 caracteres</strong>
+              </mat-error>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+
+          </form>
+
+        </mat-card-content>
+
+        <!-- CARD ACTIONS-->
+        <mat-card-actions>
+          <button type="submit" [disabled]="registerUser.invalid" mat-raised-button color="primary" (click)="registerClientForm(registerUser.value)">Registrar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="col">
+
+    </div>
+  </div>
+
+</div>
