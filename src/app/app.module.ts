@@ -19,12 +19,15 @@ import {MatInputModule} from "@angular/material/input";
 import {LobbyComponent} from "./component/lobby/lobby.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
+import { FormsModule } from '@angular/forms';
+import { NavComponent } from './component/shared/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LobbyComponent,
     RegisterComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from "@angular/material
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {
