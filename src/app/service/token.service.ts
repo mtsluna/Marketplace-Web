@@ -10,7 +10,7 @@ import {tap} from 'rxjs/operators';
 })
 export class TokenService {
 
-  BASE_URL = 'https://udamarket.herokuapp.com/api';
+  BASE_URL = 'https://udamarket.herokuapp.com/api/';
 
   constructor(private http: HttpClient) { }
 

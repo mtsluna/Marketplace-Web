@@ -10,6 +10,7 @@ export class LobbyComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

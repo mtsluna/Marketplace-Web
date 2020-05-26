@@ -8,7 +8,7 @@ import {TokenService} from './token.service';
 })
 export class GenericService <S> {
 
-  BASE_URL = 'http://localhost:8000/api/';
+  BASE_URL = 'https://udamarket.herokuapp.com/api/';
 
   constructor(private http: HttpClient, private tokenService: TokenService, @Inject(String) private readonly url: string) {
     this.url = url;
