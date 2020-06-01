@@ -178,8 +178,10 @@ export class RegisterComponent implements OnInit {
   changeFormType(){
     if(this.formtype == 'client'){
       this.formtype = 'store';
+      this.registerUser.reset();
     }else{
       this.formtype = 'client';
+      this.registerStore.reset();
     }
   }
 

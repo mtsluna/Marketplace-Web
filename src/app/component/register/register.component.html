@@ -349,7 +349,7 @@
 
           <!-- CARD ACTIONS-->
           <mat-card-actions>
-            <button type="submit" [disabled]="registerStore.valid" mat-raised-button color="primary"
+            <button type="submit" [disabled]="registerStore.invalid" mat-raised-button color="primary"
                     (click)="registerStoreForm(registerStore.value)">Registrar
             </button>
           </mat-card-actions>

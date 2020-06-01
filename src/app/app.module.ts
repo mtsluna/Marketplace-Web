@@ -26,6 +26,8 @@ import {FirstUpperPipe} from './pipe/first-upper.pipe';
 import {MatBadgeModule} from '@angular/material/badge';
 import { FooterComponent } from './component/shared/footer/footer.component';
 import { StoreComponent } from './component/store/store.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { StoreComponent } from './component/store/store.component';
     ReactiveFormsModule,
     FormsModule,
     MatProgressSpinnerModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [
     {
