@@ -17,17 +17,18 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {LobbyComponent} from "./component/lobby/lobby.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
-import { FormsModule } from '@angular/forms';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { NavComponent } from './component/shared/nav/nav.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
     AppComponent,
     LobbyComponent,
     RegisterComponent,
-    NavComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,10 @@ import { NavComponent } from './component/shared/nav/nav.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    FormsModule
+    MatSlideToggleModule,
+    FormsModule,
+    MatSelectModule
+
   ],
   providers: [
     {

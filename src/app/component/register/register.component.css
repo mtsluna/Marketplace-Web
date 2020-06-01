@@ -4,3 +4,15 @@ mat-card-title {
 .name-container{
 overflow-x: auto;
 }
+mat-slide-toggle{
+
+}
+.card{
+  border-radius: 8px;
+  margin-top: 20px;
+  width: 400px;
+  alignment: center;
+}
+.item{
+  width: fit-content;
+}
