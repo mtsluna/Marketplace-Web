@@ -3,23 +3,33 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="#">TuCompra</a>
+    <a class="navbar-brand" routerLink=""><b>Shop</b><span class="red">Center</span></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/lobby">Shops <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="/contact">Contacto</a>
       </li>
     </ul>
   </div>
   <form class="form-inline">
     <div>
-      <mat-icon>person</mat-icon>
+      <a>
+        <mat-icon matBadge="+99" matBadgeColor="warn" class="black">shopping_cart</mat-icon>
+      </a>
     </div>
     <div class="nav-icon"></div>
     <div>
-      <mat-icon>logout</mat-icon>
+      <a routerLink="/profile">
+        <mat-icon class="black">person</mat-icon>
+      </a>
+    </div>
+    <div class="nav-icon"></div>
+    <div>
+      <a routerLink="/logout">
+        <mat-icon class="black">logout</mat-icon>
+      </a>
     </div>
   </form>
 </nav>

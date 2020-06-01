@@ -1,6 +1,5 @@
 .example-card {
   max-width: 400px;
-  border-radius: 0;
   border: 0px solid;
   box-shadow: none;
 }
@@ -8,10 +7,6 @@
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
-}
-
-.stores {
-  margin: 1vh;
 }
 
 a {
@@ -25,4 +20,19 @@ a {
 .img-size {
   object-fit: cover;
   height: 200px;
+}
+
+.stores {
+  margin: 1vh;
+}
+
+.spinner{
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category{
+  padding-top: 10px;
 }

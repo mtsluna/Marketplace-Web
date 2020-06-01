@@ -1,61 +1,18 @@
 <div class="stores">
-  <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="center">
-    <div fxFlex.lt-lg="0 1 calc(25%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
-      <mat-card class="example-card">
-        <img class="img-size" mat-card-image src="https://www.sitioandino.com.ar/files/image/159/159780/542c0b63148e0.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-title>Soppelsa</mat-card-title>
-        <mat-card-subtitle>Av. San Martin 1922, Mendoza, Argentina</mat-card-subtitle>
-        <mat-divider></mat-divider>
-      </mat-card>
-    </div>
-    <div fxFlex.lt-lg="0 1 calc(33.3)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
-      <mat-card class="example-card">
-        <img class="img-size" mat-card-image src="https://img.guiaoleo.com.ar/unsafe/938x528/filters:fill(green)/capri-31-2a809932-95fb-4d92-b864-78e264786370" alt="Photo of a Shiba Inu">
-        <mat-card-title>Pizzeria Capri</mat-card-title>
-        <mat-card-subtitle>Av. San Martin 1922, Mendoza, Argentina</mat-card-subtitle>
-        <mat-divider></mat-divider>
-      </mat-card>
-    </div>
-    <div fxFlex.lt-lg="0 1 calc(33.3)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
-      <mat-card class="example-card">
-        <img class="img-size" mat-card-image src="https://dla.cdncimeco.com/uploads/2017/10/image59d4e817d32e9.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-title>La Vene</mat-card-title>
-        <mat-card-subtitle>Av. San Martin 1922, Mendoza, Argentina</mat-card-subtitle>
-        <mat-divider></mat-divider>
-      </mat-card>
-    </div>
-    <div fxFlex.lt-lg="0 1 calc(33.3)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
-      <mat-card class="example-card">
-        <img class="img-size" mat-card-image src="https://www.infocampo.com.ar/wp-content/uploads/2020/02/alimentos-helados-infocampo.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-title>Helados Lomoro</mat-card-title>
-        <mat-card-subtitle>Av. San Martin 1922, Mendoza, Argentina</mat-card-subtitle>
-        <mat-divider></mat-divider>
-      </mat-card>
-    </div>
-    <div fxFlex.lt-lg="0 1 calc(33.3)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
-      <mat-card class="example-card">
-        <img class="img-size" mat-card-image src="https://www.infocampo.com.ar/wp-content/uploads/2020/02/alimentos-helados-infocampo.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-title>Helados Lomoro</mat-card-title>
-        <mat-card-subtitle>Av. San Martin 1922, Mendoza, Argentina</mat-card-subtitle>
-        <mat-divider></mat-divider>
-      </mat-card>
-    </div>
-    <div fxFlex.lt-lg="0 1 calc(33.3)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
-      <mat-card class="example-card">
-        <img class="img-size" mat-card-image src="https://www.infocampo.com.ar/wp-content/uploads/2020/02/alimentos-helados-infocampo.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-title>Helados Lomoro</mat-card-title>
-        <mat-card-subtitle>Av. San Martin 1922, Mendoza, Argentina</mat-card-subtitle>
-        <mat-divider></mat-divider>
-      </mat-card>
-    </div>
-    <div fxFlex.lt-lg="0 1 calc(33.3)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
-      <mat-card class="example-card">
-        <img class="img-size" mat-card-image src="https://www.infocampo.com.ar/wp-content/uploads/2020/02/alimentos-helados-infocampo.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-title>Helados Lomoro</mat-card-title>
-        <mat-card-subtitle>Av. San Martin 1922, Mendoza, Argentina</mat-card-subtitle>
-        <mat-divider></mat-divider>
-      </mat-card>
+  <div *ngIf="onCharge == true" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="onCharge == false" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="center">
+    <div *ngFor="let store of stores" fxFlex.lt-lg="0 1 calc(25%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
+      <a routerLink="{{store.id}}">
+        <mat-card class="example-card">
+          <img class="img-size" mat-card-image src="{{(store.image != null && store.image.url != null) ? store.image.url : 'https://www.salud.mapfre.es/wp-content/uploads/2018/05/default-img-1.gif'}}" alt="Photo of a Shiba Inu">
+          <mat-card-title>{{store.name}}</mat-card-title>
+          <mat-card-subtitle>{{store.address.street.trim()+' '+store.address.number+', '+store.address.city.name.trim()+', '+store.address.city.state.name.trim()+', '+store.address.city.state.country.name.trim()}}</mat-card-subtitle>
+          <mat-divider></mat-divider>
+          <mat-card-subtitle class="category">Categoria: {{store.area.name | firstUpper}}</mat-card-subtitle>
+        </mat-card>
+      </a>
     </div>
   </div>
 </div>
-

@@ -17,18 +17,23 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {LobbyComponent} from "./component/lobby/lobby.component";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { FormsModule } from '@angular/forms';
 import { NavComponent } from './component/shared/nav/nav.component';
-import {MatSelectModule} from "@angular/material/select";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {FirstUpperPipe} from './pipe/first-upper.pipe';
+import {MatBadgeModule} from '@angular/material/badge';
+import { FooterComponent } from './component/shared/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LobbyComponent,
     RegisterComponent,
-    NavComponent
+    NavComponent,
+    FirstUpperPipe,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,10 +50,9 @@ import {MatSelectModule} from "@angular/material/select";
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSlideToggleModule,
     FormsModule,
-    MatSelectModule
-
+    MatProgressSpinnerModule,
+    MatBadgeModule
   ],
   providers: [
     {
