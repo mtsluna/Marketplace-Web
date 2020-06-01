@@ -1,47 +1,56 @@
+<!-- CLIENT FORMULARY -->
 <div class="container">
   <div class="row">
-    <div class="col">
 
-    </div>
 
     <div class="col">
 
       <mat-card class="card">
         <mat-card-title>Registro</mat-card-title>
+        <mat-slide-toggle color="primary" (change)="changeFormType()">
+          <div *ngIf="formtype=='client';else other">Tienda</div>
+          <ng-template #other>Comprador</ng-template>
+        </mat-slide-toggle>
         <mat-divider></mat-divider>
-        <mat-card-content>
+        <mat-card-content *ngIf="formtype=='client'">
           <form class="example-form" [formGroup]="registerUser">
 
-          <div class="name-container">
-          <table><tr>
+            <div class="name-container">
+              <table>
+                <tr>
 
-          <!-- NAME -->
-          <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Nombre" formControlName="name"
-                   [errorStateMatcher]="matcher">
-            <mat-hint>Ingrese nombre</mat-hint>
-            <mat-error *ngIf="registerUser.get('name').hasError('required')">
-              Nombre es <strong>requerido</strong>
-            </mat-error>
-          </mat-form-field></td>
+                  <!-- NAME -->
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Nombre" formControlName="name"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Ingrese nombre</mat-hint>
+                      <mat-error *ngIf="registerUser.get('name').hasError('required')">
+                        Nombre es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </td>
 
-          <!-- SURNAME -->
-          <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Apellido" formControlName="surname"
-                   [errorStateMatcher]="matcher">
-            <mat-hint>Ingrese apellido</mat-hint>
-            <mat-error *ngIf="registerUser.get('surname').hasError('required')">
-              Apellido es <strong>requerido</strong>
-            </mat-error>
-          </mat-form-field></td>
+                  <!-- SURNAME -->
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Apellido" formControlName="surname"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Ingrese apellido</mat-hint>
+                      <mat-error *ngIf="registerUser.get('surname').hasError('required')">
+                        Apellido es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </td>
 
-          </tr></table></div>
-
+                </tr>
+              </table>
+            </div>
 
 
             <!-- DNI -->
             <mat-form-field class="example-full-width">
-              <input type="number" matInput placeholder="DNI" formControlName="dni"
+              <input matInput placeholder="DNI" formControlName="dni"
                      [errorStateMatcher]="matcher">
               <mat-hint>Ingrese DNI</mat-hint>
               <mat-error *ngIf="registerUser.get('dni').hasError('required')">
@@ -50,8 +59,11 @@
               <mat-error *ngIf="registerUser.get('dni').hasError('maxlength')">
                 Debe tener menos de <strong>10 caracteres</strong>
               </mat-error>
+              <mat-error *ngIf="registerUser.get('dni').hasError('pattern')">
+                DNI deben ser solo<strong>numeros</strong>
+              </mat-error>
             </mat-form-field>
-
+            <br>
             <!-- USERNAME -->
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Nombre de usuario" formControlName="username"
@@ -61,9 +73,9 @@
                 Nombre de usuario es <strong>requerido</strong>
               </mat-error>
             </mat-form-field>
-
+            <br>
             <!-- PASSWORD -->
-            <mat-form-field class="example-full-width" >
+            <mat-form-field class="example-full-width">
               <input matInput placeholder="Contraseña" formControlName="password"
                      [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
               <mat-hint>Ingrese contraseña</mat-hint>
@@ -73,25 +85,282 @@
               <mat-error *ngIf="registerUser.get('password').hasError('minlength')">
                 Debe tener mas de <strong>6 caracteres</strong>
               </mat-error>
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
+            <mat-divider></mat-divider>
+            <br><br>
 
+            <mat-card-title>Dirección</mat-card-title>
+
+            <table>
+              <tr>
+                <td>
+                  <div formGroupName="address">
+                    <!-- STREET NAME -->
+                    <mat-form-field class="example-full-width item">
+                      <input matInput placeholder="Calle" formControlName="street"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Ingrese calle</mat-hint>
+                      <mat-error *ngIf="registerUser.get('address').get('street').hasError('required')">
+                        Calle es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <!-- STREET NUMBER -->
+                    <mat-form-field class="example-full-width item">
+                      <input type="number" matInput placeholder="Calle N°" formControlName="number"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Calle N°</mat-hint>
+                      <mat-error *ngIf="registerUser.get('address').get('number').hasError('required')">
+                        N° es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <!-- POSTAL CODE -->
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Codigo Postal" formControlName="postalCode"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Ingrese CP</mat-hint>
+                      <mat-error *ngIf="registerUser.get('address').get('postalCode').hasError('required')">
+                        CP es <strong>requerido</strong>
+                      </mat-error>
+                      <mat-error *ngIf="registerUser.get('address').get('postalCode').hasError('maxLength')">
+                        Máximo <strong>5 digitos</strong>
+                      </mat-error>
+                      <mat-error *ngIf="registerUser.get('address').get('postalCode').hasError('pattern')">
+                        Deben contener solo <strong>numeros</strong>
+                      </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <!-- STATE -->
+                    <mat-form-field>
+                      <mat-label>Provincia</mat-label>
+                      <mat-select (selectionChange)="this.stateId=$event.value">
+                        <mat-option *ngFor="let state of states" value={{state.id}}>
+                          <div *ngIf="state.country.id == countryid">{{state.name}}</div>
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <!-- CITY -->
+                    <div formGroupName="city">
+                      <mat-form-field>
+                        <mat-label>Ciudad</mat-label>
+                        <mat-select formControlName="id" [errorStateMatcher]="matcher">
+                          <div *ngFor="let city of cities">
+                            <mat-option [value]="city.id" *ngIf="stateId==city.state.id">
+                              {{city.name}}
+                            </mat-option>
+                          </div>
+                        </mat-select>
+                        <mat-error *ngIf="registerUser.get('address').get('city').get('id').hasError('required')">
+                          Ciudad es <strong>requerido</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div><!--FORM GROUP CITY-->
+                  </div><!-- FORM GROUP ADDRESS-->
+                </td>
+              </tr>
+            </table>
           </form>
+
+          <!-- CARD ACTIONS-->
+          <mat-card-actions>
+            <button type="submit" [disabled]="registerUser.invalid" mat-raised-button color="primary"
+                    (click)="registerClientForm(registerUser.value)">Registrar
+            </button>
+          </mat-card-actions>
 
         </mat-card-content>
 
-        <!-- CARD ACTIONS-->
-        <mat-card-actions>
-          <button type="submit" [disabled]="registerUser.invalid" mat-raised-button color="primary" (click)="registerClientForm(registerUser.value)">Registrar</button>
-        </mat-card-actions>
+
+        <!-- STORE FORMULARY -->
+
+        <mat-card-content *ngIf="formtype=='store'">
+          <form class="example-form" [formGroup]="registerStore">
+
+            <div class="name-container">
+              <table>
+                <tr>
+
+                  <!-- NAME -->
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Nombre" formControlName="name"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Ingrese nombre</mat-hint>
+                      <mat-error *ngIf="registerStore.get('name').hasError('required')">
+                        Nombre es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </td>
+
+                </tr>
+              </table>
+            </div>
+
+
+            <!-- CUIL -->
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="CUIL" formControlName="CUIL"
+                     [errorStateMatcher]="matcher">
+              <mat-hint>Ingrese CUIL</mat-hint>
+              <mat-error *ngIf="registerStore.get('CUIL').hasError('required')">
+                CUIL es <strong>requerido</strong>
+              </mat-error>
+              <mat-error *ngIf="registerStore.get('CUIL').hasError('maxlength')">
+                Debe tener menos de <strong>10 caracteres</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- BUSINESS NAME -->
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Nombre de negocio" formControlName="businessName"
+                     [errorStateMatcher]="matcher">
+              <mat-hint>Ingrese nombre de negocio</mat-hint>
+              <mat-error *ngIf="registerStore.get('businessName').hasError('required')">
+                Nombre de negocio es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- BUSINESS AREA -->
+            <div formGroupName="area">
+              <mat-form-field>
+                <mat-label>Rubro negocio</mat-label>
+                <mat-select formControlName="id" [errorStateMatcher]="matcher">
+                  <div *ngFor="let area of storeAreas">
+                    <mat-option [value]="area.id">
+                      {{area.name}}
+                    </mat-option>
+                  </div>
+                </mat-select>
+                <mat-error *ngIf="registerStore.get('area').get('id').hasError('required')">
+                  Rubro negocio es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div><!--FORM GROUP STORE AREA-->
+
+            <div formGroupName="user">
+              <!-- USERNAME -->
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Nombre de usuario" formControlName="username"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Ingrese nombre de usuario</mat-hint>
+                <mat-error *ngIf="registerStore.get('user').get('username').hasError('required')">
+                  Nombre de usuario es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+
+              <!-- PASSWORD -->
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Contraseña" formControlName="password"
+                       [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+                <mat-hint>Ingrese contraseña</mat-hint>
+                <mat-error *ngIf="registerStore.get('user').get('password').hasError('required')">
+                  Contraseña es <strong>requerida</strong>
+                </mat-error>
+                <mat-error *ngIf="registerStore.get('user').get('password').hasError('minlength')">
+                  Debe tener mas de <strong>6 caracteres</strong>
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+
+
+            <mat-divider></mat-divider>
+            <br><br>
+
+            <mat-card-title>Dirección</mat-card-title>
+
+            <table>
+              <tr>
+                <td>
+                  <div formGroupName="address">
+                    <!-- STREET NAME -->
+                    <mat-form-field class="example-full-width item">
+                      <input matInput placeholder="Calle" formControlName="street"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Ingrese calle</mat-hint>
+                      <mat-error *ngIf="registerStore.get('address').get('street').hasError('required')">
+                        Calle es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <!-- STREET NUMBER -->
+                    <mat-form-field class="example-full-width item">
+                      <input type="number" matInput placeholder="Calle N°" formControlName="number"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Calle N°</mat-hint>
+                      <mat-error *ngIf="registerStore.get('address').get('number').hasError('required')">
+                        N° es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <!-- POSTAL CODE -->
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Codigo Postal" formControlName="postalCode"
+                             [errorStateMatcher]="matcher">
+                      <mat-hint>Ingrese CP</mat-hint>
+                      <mat-error *ngIf="registerStore.get('address').get('postalCode').hasError('required')">
+                        CP es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <!-- STATE -->
+                    <mat-form-field>
+                      <mat-label>Provincia</mat-label>
+                      <mat-select (selectionChange)="this.stateId=$event.value">
+                        <mat-option *ngFor="let state of states" value={{state.id}}>
+                          <div *ngIf="state.country.id == countryid">{{state.name}}</div>
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <!-- CITY -->
+                    <div formGroupName="city">
+                      <mat-form-field>
+                        <mat-label>Ciudad</mat-label>
+                        <mat-select formControlName="id" [errorStateMatcher]="matcher">
+                          <div *ngFor="let city of cities">
+                            <mat-option [value]="city.id" *ngIf="stateId==city.state.id">
+                              {{city.name}}
+                            </mat-option>
+                          </div>
+                        </mat-select>
+                        <mat-error *ngIf="registerStore.get('address').get('city').get('id').hasError('required')">
+                          Ciudad es <strong>requerido</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div><!--FORM GROUP CITY-->
+                  </div><!-- FORM GROUP ADDRESS-->
+                </td>
+              </tr>
+            </table>
+
+
+          </form>
+
+
+          <!-- CARD ACTIONS-->
+          <mat-card-actions>
+            <button type="submit" [disabled]="registerStore.valid" mat-raised-button color="primary"
+                    (click)="registerStoreForm(registerStore.value)">Registrar
+            </button>
+          </mat-card-actions>
+
+        </mat-card-content>
+
+
       </mat-card>
     </div>
 
-    <div class="col">
 
-    </div>
   </div>
 
 </div>

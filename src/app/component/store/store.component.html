@@ -1,0 +1,17 @@
+<div class="store">
+  <div class="container-fluid">
+    <img class="img-size" mat-card-image src="{{store.image.url}}" alt="Photo of a Shiba Inu">
+    <mat-card class="example-card">
+      <mat-card-title>{{store.name}}</mat-card-title>
+      <mat-card-subtitle>{{store.address.street}} {{store.address.number}}, {{store.address.city.state.name}}, {{store.address.city.state.country.name}}</mat-card-subtitle>
+      <mat-divider></mat-divider>
+    </mat-card>
+  </div>
+  <h2>Productos</h2>
+  <mat-divider></mat-divider>
+  <div fxLayoutGap class="product" *ngFor="let product of store.products">
+  <mat-card class="product-card">
+    <mat-card-title>{{product.name}}</mat-card-title>
+  </mat-card>
+  </div>
+</div>

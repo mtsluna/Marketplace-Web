@@ -25,6 +25,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {FirstUpperPipe} from './pipe/first-upper.pipe';
 import {MatBadgeModule} from '@angular/material/badge';
 import { FooterComponent } from './component/shared/footer/footer.component';
+import { StoreComponent } from './component/store/store.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,8 @@ import { FooterComponent } from './component/shared/footer/footer.component';
     NavComponent,
     FirstUpperPipe,
     FooterComponent,
+    NavComponent,
+    StoreComponent
   ],
   imports: [
     BrowserModule,
