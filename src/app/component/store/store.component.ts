@@ -11,13 +11,17 @@ import {Product} from "../../model/product";
 })
 export class StoreComponent implements OnInit {
   store: Store;
+  onCharge: boolean = true;
 
   constructor(private activatedRoute: ActivatedRoute,
               private storeService: StoreService) {
 
+    this.onCharge = true;
+
     this.activatedRoute.params.subscribe( params => {
       this.storeService.getById(params['id']).subscribe( data =>{
         this.store = data;
+        this.onCharge = false;
       });
     });
   }

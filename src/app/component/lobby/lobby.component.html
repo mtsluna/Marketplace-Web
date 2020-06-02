@@ -6,7 +6,7 @@
     <div *ngFor="let store of stores" fxFlex.lt-lg="0 1 calc(25%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)" class="card-margin">
       <a routerLink="/store/{{store.id}}">
         <mat-card class="example-card">
-          <img class="img-size" mat-card-image src="{{(store.image != null && store.image.url != null) ? store.image.url : 'https://www.salud.mapfre.es/wp-content/uploads/2018/05/default-img-1.gif'}}" alt="Photo of a Shiba Inu">
+          <img class="img-size" mat-card-image src="{{(store.image != null && store.image.url != null) ? store.image.url : 'https://www.salud.mapfre.es/wp-content/uploads/2018/05/default-img-1.gif'}}">
           <mat-card-title>{{store.name}}</mat-card-title>
           <mat-card-subtitle>{{store.address.street.trim()+' '+store.address.number+', '+store.address.city.name.trim()+', '+store.address.city.state.name.trim()+', '+store.address.city.state.country.name.trim()}}</mat-card-subtitle>
           <mat-divider></mat-divider>
