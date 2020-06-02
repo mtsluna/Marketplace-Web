@@ -2,5 +2,30 @@ mat-card-title {
   text-align: center;
 }
 .name-container{
-overflow-x: auto;
+  max-width: 100%;
+  padding: 1px;
+}
+
+.mCard{
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.cCard{
+  width: 100%;
+}
+
+.user-container{
+  padding: 10px;
+}
+
+.register{
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.red{
+  color: red;
 }

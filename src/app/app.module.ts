@@ -28,6 +28,7 @@ import { FooterComponent } from './component/shared/footer/footer.component';
 import { StoreComponent } from './component/store/store.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -40,27 +41,28 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     NavComponent,
     StoreComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatListModule,
-    FlexModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    MatBadgeModule,
-    MatSelectModule,
-    MatSlideToggleModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatListModule,
+        FlexModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        MatBadgeModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatStepperModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

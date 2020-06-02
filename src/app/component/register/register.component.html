@@ -1,10 +1,188 @@
+<div class="register" style="align-content: center">
+  <mat-card class="mCard">
+
+    <mat-card-content *ngIf="formtype=='client'">
+      <form class="example-form" [formGroup]="registerUser">
+
+        <mat-horizontal-stepper linear #stepper>
+          <mat-step class="red" [editable]="true">
+            <ng-template matStepLabel>Tus datos</ng-template>
+            <div class="name-container">
+              <div class="row">
+                <div class="col-6">
+                  <!-- NAME -->
+                  <mat-form-field class="cCard">
+                    <input matInput placeholder="Nombre" formControlName="name"
+                           [errorStateMatcher]="matcher">
+                    <mat-hint>Ingrese nombre</mat-hint>
+                    <mat-error *ngIf="registerUser.get('name').hasError('required')">
+                      Nombre es <strong>requerido</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <!-- SURNAME -->
+                  <mat-form-field class="cCard">
+                    <input matInput placeholder="Apellido" formControlName="surname"
+                           [errorStateMatcher]="matcher">
+                    <mat-hint>Ingrese apellido</mat-hint>
+                    <mat-error *ngIf="registerUser.get('surname').hasError('required')">
+                      Apellido es <strong>requerido</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div style="align-items: center">
+              <!-- DNI -->
+              <mat-form-field class="cCard">
+                <input matInput placeholder="DNI" formControlName="dni"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Ingrese DNI</mat-hint>
+                <mat-error *ngIf="registerUser.get('dni').hasError('required')">
+                  DNI es <strong>requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="registerUser.get('dni').hasError('maxlength')">
+                  Debe tener menos de <strong>10 caracteres</strong>
+                </mat-error>
+                <mat-error *ngIf="registerUser.get('dni').hasError('pattern')">
+                  DNI deben ser solo<strong>numeros</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <!-- USERNAME -->
+                <mat-form-field class="cCard">
+                  <input matInput placeholder="Nombre de usuario" formControlName="username"
+                         [errorStateMatcher]="matcher">
+                  <mat-hint>Ingrese nombre de usuario</mat-hint>
+                  <mat-error *ngIf="registerUser.get('username').hasError('required')">
+                    Nombre de usuario es <strong>requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <!-- PASSWORD -->
+                <mat-form-field class="cCard">
+                  <input matInput placeholder="Contraseña" formControlName="password"
+                         [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+                  <mat-hint>Ingrese contraseña</mat-hint>
+                  <mat-error *ngIf="registerUser.get('password').hasError('required')">
+                    Contraseña es <strong>requerida</strong>
+                  </mat-error>
+                  <mat-error *ngIf="registerUser.get('password').hasError('minlength')">
+                    Debe tener mas de <strong>6 caracteres</strong>
+                  </mat-error>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step [editable]="true">
+            <ng-template matStepLabel>Tu dirección</ng-template>
+            <div formGroupName="address">
+              <div class="row">
+                <div class="col-6">
+                  <!-- STREET NAME -->
+                  <mat-form-field class="cCard">
+                    <input matInput placeholder="Calle" formControlName="street"
+                           [errorStateMatcher]="matcher">
+                    <mat-hint>Ingrese calle</mat-hint>
+                    <mat-error *ngIf="registerUser.get('address').get('street').hasError('required')">
+                      Calle es <strong>requerido</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <!-- STREET NUMBER -->
+                  <mat-form-field class="cCard">
+                    <input type="number" matInput placeholder="Calle N°" formControlName="number"
+                           [errorStateMatcher]="matcher">
+                    <mat-hint>Calle N°</mat-hint>
+                    <mat-error *ngIf="registerUser.get('address').get('number').hasError('required')">
+                      N° es <strong>requerido</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- POSTAL CODE -->
+              <mat-form-field class="cCard">
+                <input matInput placeholder="Codigo Postal" formControlName="postalCode"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Ingrese CP</mat-hint>
+                <mat-error *ngIf="registerUser.get('address').get('postalCode').hasError('required')">
+                  CP es <strong>requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="registerUser.get('address').get('postalCode').hasError('maxLength')">
+                  Máximo <strong>5 digitos</strong>
+                </mat-error>
+                <mat-error *ngIf="registerUser.get('address').get('postalCode').hasError('pattern')">
+                  Deben contener solo <strong>numeros</strong>
+                </mat-error>
+              </mat-form-field>
+              <br>
+
+              <div class="row">
+                <div class="col-6">
+                  <!-- STATE -->
+                  <mat-form-field class="cCard">
+                    <mat-label>Provincia</mat-label>
+                    <mat-select (selectionChange)="this.stateId=$event.value">
+                      <mat-option *ngFor="let state of states" value={{state.id}}>
+                        <div *ngIf="state.country.id == countryid">{{state.name}}</div>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                </div>
+                <div class="col-6">
+                  <!-- CITY -->
+                  <div formGroupName="city">
+                    <mat-form-field class="cCard">
+                      <mat-label>Ciudad</mat-label>
+                      <mat-select formControlName="id" [errorStateMatcher]="matcher">
+                        <div *ngFor="let city of cities">
+                          <mat-option [value]="city.id" *ngIf="stateId==city.state.id">
+                            {{city.name}}
+                          </mat-option>
+                        </div>
+                      </mat-select>
+                      <mat-error *ngIf="registerUser.get('address').get('city').get('id').hasError('required')">
+                        Ciudad es <strong>requerido</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div><!--FORM GROUP CITY-->
+                </div><!-- FORM GROUP ADDRESS-->
+                </div>
+              </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Finalizar</ng-template>
+            <!-- CARD ACTIONS-->
+            <mat-card-actions align="center">
+              <button type="submit" [disabled]="registerUser.invalid" mat-raised-button color="primary"
+                      (click)="registerClientForm(registerUser.value)">Registrar
+              </button>
+            </mat-card-actions>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<br>
+
 <!-- CLIENT FORMULARY -->
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-
-
     <div class="col">
-
       <mat-card class="card">
         <mat-card-title>Registro</mat-card-title>
         <mat-slide-toggle color="primary" (change)="changeFormType()">
@@ -18,7 +196,6 @@
             <div class="name-container">
               <table>
                 <tr>
-
                   <!-- NAME -->
                   <td>
                     <mat-form-field class="example-full-width">
@@ -167,12 +344,7 @@
             </table>
           </form>
 
-          <!-- CARD ACTIONS-->
-          <mat-card-actions>
-            <button type="submit" [disabled]="registerUser.invalid" mat-raised-button color="primary"
-                    (click)="registerClientForm(registerUser.value)">Registrar
-            </button>
-          </mat-card-actions>
+
 
         </mat-card-content>
 

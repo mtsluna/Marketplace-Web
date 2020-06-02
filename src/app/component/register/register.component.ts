@@ -9,7 +9,7 @@ import {StateService} from "../../service/state.service";
 import {City} from "../../model/city";
 import {State} from "../../model/state";
 import {StoreService} from "../../service/store.service";
-import {StoreAreaService} from "../../service/store-area.service";
+import {StoreAreaService} from '../../service/store-area.service';
 import {StoreArea} from "../../model/storeArea";
 import {Router} from "@angular/router";
 
