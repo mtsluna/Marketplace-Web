@@ -3,12 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import {LobbyComponent} from './component/lobby/lobby.component';
 import {RegisterComponent} from "./component/register/register.component";
 import {StoreComponent} from "./component/store/store.component";
-
+import {LogInComponent} from "./component/log-in/log-in.component";
 
 const routes: Routes = [
   { path: 'lobby', component: LobbyComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'store/:id', component: StoreComponent},
+  { path: 'login', component: LogInComponent},
   { path: '**', component: LobbyComponent}
 ];
 

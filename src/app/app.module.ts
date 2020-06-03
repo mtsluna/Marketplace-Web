@@ -29,6 +29,8 @@ import { StoreComponent } from './component/store/store.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatStepperModule} from '@angular/material/stepper';
+import {LogInComponent} from './component/log-in/log-in.component';
+import {AuthService} from "./service/auth.service";
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     FirstUpperPipe,
     FooterComponent,
     NavComponent,
-    StoreComponent
+    StoreComponent,
+    LogInComponent
   ],
     imports: [
         BrowserModule,
@@ -64,6 +67,7 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatStepperModule
     ],
   providers: [
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
