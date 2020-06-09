@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "../../model/store";
 import {StoreService} from "../../service/store.service";
 import {Product} from "../../model/product";
+import {CartService} from '../../service/cart.service';
 
 @Component({
   selector: 'app-store',
@@ -14,7 +15,8 @@ export class StoreComponent implements OnInit {
   onCharge: boolean = true;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private storeService: StoreService) {
+              private storeService: StoreService,
+              private cartService: CartService) {
 
     this.onCharge = true;
 
@@ -27,6 +29,10 @@ export class StoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  addProduct(product: Product){
+    this.cartService.addProduct(product)
   }
 
 }

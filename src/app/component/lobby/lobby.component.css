@@ -24,10 +24,11 @@ a {
 
 .stores {
   margin: 1vh;
+  padding-bottom: 20px;
 }
 
 .spinner{
-  height: 600px;
+  height: 605px;
   display: flex;
   justify-content: center;
   align-items: center;

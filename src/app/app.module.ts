@@ -29,6 +29,9 @@ import { StoreComponent } from './component/store/store.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatStepperModule} from '@angular/material/stepper';
+import { CartComponent } from './component/shared/cart/cart.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     FirstUpperPipe,
     FooterComponent,
     NavComponent,
-    StoreComponent
+    StoreComponent,
+    CartComponent
   ],
     imports: [
         BrowserModule,
@@ -61,7 +65,9 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatBadgeModule,
         MatSelectModule,
         MatSlideToggleModule,
-        MatStepperModule
+        MatStepperModule,
+        MatDialogModule,
+        MatTableModule
     ],
   providers: [
     {

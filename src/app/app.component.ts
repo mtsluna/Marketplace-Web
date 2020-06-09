@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {TokenService} from './service/token.service';
 import {ClientService} from './service/client.service';
+import {Product} from './model/product';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,15 @@ import {ClientService} from './service/client.service';
 })
 export class AppComponent {
   title = 'marketplace';
+  // @ts-ignore
+  products: Product[] = [{
+    name: 'a',
+    price: 123,
+    description: 'asd'
+  }];
 
   constructor(private clientService: ClientService, private tokenService: TokenService) {
+
   }
 
   getRefresh(){

@@ -26,7 +26,7 @@
         <mat-divider></mat-divider>
         <mat-card-actions>
           <div class="product-btn">
-            <button class="product-btn" mat-stroked-button>· {{product.price | currency}} · Añadir</button>
+            <button class="product-btn" mat-stroked-button (click)="addProduct(product)">· {{product.price | currency}} · Añadir</button>
           </div>
         </mat-card-actions>
       </mat-card>

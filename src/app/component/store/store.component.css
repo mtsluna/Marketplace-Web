@@ -8,6 +8,7 @@
 .store{
   max-height: 100%;
   position: relative;
+  padding-bottom: 20px;
 }
 .container-fluid{
   position: relative;

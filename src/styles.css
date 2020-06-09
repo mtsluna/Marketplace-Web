@@ -9,3 +9,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: red!important;
 }
+
+body{
+  padding-top: 40px;
+}
+
+.app-full-bleed-dialog .mat-dialog-container {
+  padding: 0;
+}

@@ -13,5 +13,5 @@ export class Product {
   store: Store;
   image: Image;
   area: ProductArea;
-
+  count: number = 0;
 }
