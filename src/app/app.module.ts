@@ -29,9 +29,11 @@ import { StoreComponent } from './component/store/store.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatStepperModule} from '@angular/material/stepper';
-import { CartComponent } from './component/shared/cart/cart.component';
+import {CartComponent} from './component/shared/cart/cart.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import {LogInComponent} from './component/log-in/log-in.component';
+import {AuthService} from "./service/auth.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import {MatTableModule} from '@angular/material/table';
     FooterComponent,
     NavComponent,
     StoreComponent,
+    LogInComponent,
     CartComponent
   ],
     imports: [
@@ -65,11 +68,10 @@ import {MatTableModule} from '@angular/material/table';
         MatBadgeModule,
         MatSelectModule,
         MatSlideToggleModule,
-        MatStepperModule,
-        MatDialogModule,
-        MatTableModule
+        MatStepperModule
     ],
   providers: [
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
