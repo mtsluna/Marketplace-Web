@@ -2,8 +2,10 @@
   width: auto;
   background-color: black;
   color: white;
-  padding: 0% 8%;
-  margin: 0%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .red {

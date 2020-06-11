@@ -1,0 +1,53 @@
+<div class="storearea-container">
+
+  <mat-form-field class="w-100" color="warn" *ngIf="onCharge == false">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Helado">
+  </mat-form-field>
+
+  <div class="container-spinner" *ngIf="onCharge == true">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="onCharge == false">
+    <table mat-table [dataSource]="dataSource" (matSortChange) = "sortMethod($event)" class="mat-elevation-z8" matSort >
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th class="text-right" mat-header-cell *matHeaderCellDef>
+          <button class="w-50 green" mat-stroked-button (click)="openDialog()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </th>
+        <td class="text-right" mat-cell *matCellDef="let element">
+          <button class="w-25" mat-stroked-button (click)="openDialog(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="w-25" mat-stroked-button color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [hidden]="onCharge == true" [pageSize]="15" [pageIndex]="page" [pageSizeOptions]="[15]" [length]="length" (page)="onPaginateChange($event)"> showFirstLastButtons></mat-paginator>
+
+</div>

@@ -4,12 +4,14 @@ import {LobbyComponent} from './component/lobby/lobby.component';
 import {RegisterComponent} from "./component/register/register.component";
 import {StoreComponent} from "./component/store/store.component";
 import {LogInComponent} from "./component/log-in/log-in.component";
+import {StoreAreaTableComponent} from './component/store-area-table/store-area-table.component';
 
 const routes: Routes = [
   { path: 'lobby', component: LobbyComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'store/:id', component: StoreComponent},
   { path: 'login', component: LogInComponent},
+  { path: 'admin/storearea', component: StoreAreaTableComponent},
   { path: '**', component: LobbyComponent}
 ];
 

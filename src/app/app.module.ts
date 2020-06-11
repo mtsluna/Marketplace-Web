@@ -34,6 +34,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {LogInComponent} from './component/log-in/log-in.component';
 import {AuthService} from "./service/auth.service";
+import { StoreAreaTableComponent } from './component/store-area-table/store-area-table.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { StoreAreaTableModalComponent } from './component/store-area-table/store-area-table-modal/store-area-table-modal.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,9 @@ import {AuthService} from "./service/auth.service";
     NavComponent,
     StoreComponent,
     LogInComponent,
-    CartComponent
+    CartComponent,
+    StoreAreaTableComponent,
+    StoreAreaTableModalComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +76,9 @@ import {AuthService} from "./service/auth.service";
     MatSlideToggleModule,
     MatStepperModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     AuthService,

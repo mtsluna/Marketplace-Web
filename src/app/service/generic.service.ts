@@ -16,6 +16,10 @@ export class GenericService <S> {
     this.tokenService = tokenService;
   }
 
+  getAllWithPagination(page: number){
+    return this.http.get(this.BASE_URL+this.url+'?page='+page, {observe: "response"});
+  }
+
   getAll(): Observable<S[]>{
     return this.http.get<S[]>(this.BASE_URL+this.url);
   }
