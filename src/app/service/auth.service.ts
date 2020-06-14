@@ -10,6 +10,7 @@ import {User} from "../model/user";
 
 export class AuthService {
   BASE_URL = 'https://udamarket.herokuapp.com/api/';
+  isLogged = false;
 
   constructor(private http: HttpClient, private tokenService: TokenService) {
     this.http = http;

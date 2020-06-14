@@ -45,6 +45,7 @@ export class LogInComponent implements OnInit {
             // login successful so redirect to the lobby and save the tokebs
             this.tokenService.saveTokenInStorage(data.token)
             this.tokenService.saveRefreshTokenInStorage(data.refresh_token)
+            this.authenticationService.isLogged = true;
             this.router.navigateByUrl('lobby');
           }
         )

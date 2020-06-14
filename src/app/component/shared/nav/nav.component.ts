@@ -3,6 +3,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {CartComponent} from '../cart/cart.component';
 import {Product} from '../../../model/product';
 import {CartService} from '../../../service/cart.service';
+import {TokenService} from "../../../service/token.service";
+import {AuthService} from "../../../service/auth.service";
 
 @Component({
   selector: 'app-nav',
@@ -16,7 +18,9 @@ export class NavComponent implements OnInit {
   items: number = 0
 
   constructor(public dialog: MatDialog,
-              private cartService: CartService) {
+              private cartService: CartService,
+              private tokenService: TokenService,
+              private authService: AuthService) {
 
   }
 
@@ -42,4 +46,11 @@ export class NavComponent implements OnInit {
     }
   }
 
+  logout(){
+    //Clear token to logout user
+    this.tokenService.saveRefreshTokenInStorage('');
+    this.tokenService.saveTokenInStorage('');
+    this.authService.isLogged = false;
+    console.log(localStorage.getItem('refreshToken'))
+  }
 }

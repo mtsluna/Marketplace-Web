@@ -38,6 +38,7 @@ import { StoreAreaTableComponent } from './component/store-area-table/store-area
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { StoreAreaTableModalComponent } from './component/store-area-table/store-area-table-modal/store-area-table-modal.component';
+import { CanActivateLoginGuard } from './guards/can-activate-login-guard.service';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { StoreAreaTableModalComponent } from './component/store-area-table/store
   ],
   providers: [
     AuthService,
+    CanActivateLoginGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
