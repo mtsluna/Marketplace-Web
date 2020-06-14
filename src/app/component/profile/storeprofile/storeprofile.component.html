@@ -1,0 +1,224 @@
+<div class="profile">
+  <div class="row">
+    <div class="col-3">
+      <mat-toolbar color="warn">
+        <mat-toolbar-row>
+          <span>Perfil</span>
+          <mat-icon class="example-icon" aria-hidden="false" aria-label="Perfil">face</mat-icon>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row>
+          <span>Compras</span>
+          <span class="example-spacer"></span>
+          <mat-icon class="example-icon" aria-hidden="false" aria-label="Compras">shopping_cart</mat-icon>
+        </mat-toolbar-row>
+
+
+      </mat-toolbar>
+    </div>
+    <div class="profile col-9" style="align-content: center">
+
+<mat-card class="mCard">
+  <mat-card-content>
+
+    <form class="example-form" [formGroup]="storeProfile">
+
+        <div class="name-container">
+          <div class="row">
+
+            <!-- NAME -->
+            <div class="col-6">
+              <mat-form-field class="cCard">
+                <input matInput placeholder="Nombre" formControlName="name"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Ingrese nombre</mat-hint>
+                <mat-error *ngIf="storeProfile.get('name').hasError('required')">
+                  Nombre es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- CUIL -->
+            <div class="col-6">
+              <mat-form-field class="cCard">
+                <input matInput placeholder="CUIL" formControlName="CUIL"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Ingrese CUIL</mat-hint>
+                <mat-error *ngIf="storeProfile.get('CUIL').hasError('required')">
+                  CUIL es <strong>requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="storeProfile.get('CUIL').hasError('maxlength')">
+                  Debe tener menos de <strong>10 caracteres</strong>
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+        </div>
+
+
+        <!-- BUSINESS NAME -->
+        <div style="align-items: center">
+          <mat-form-field class="cCard">
+            <input matInput placeholder="Razon social" formControlName="businessName"
+                   [errorStateMatcher]="matcher">
+            <mat-hint>Ingrese razon social</mat-hint>
+            <mat-error *ngIf="storeProfile.get('businessName').hasError('required')">
+              Razon social es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- BUSINESS AREA -->
+        <div formGroupName="area">
+          <mat-form-field class="cCard">
+            <mat-label>Rubro negocio</mat-label>
+            <mat-select formControlName="id" [errorStateMatcher]="matcher">
+              <div *ngFor="let area of storeAreas">
+                <mat-option [value]="area.id">
+                  {{area.name}}
+                </mat-option>
+              </div>
+            </mat-select>
+            <mat-error *ngIf="storeProfile.get('area').get('id').hasError('required')">
+              Rubro negocio es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div><!--FORM GROUP STORE AREA-->
+
+
+        <div class="row">
+          <div class="col-6">
+            <div formGroupName="user">
+              <!-- USERNAME -->
+              <mat-form-field class="cCard">
+                <input matInput placeholder="Nombre de usuario" formControlName="username"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Ingrese nombre de usuario</mat-hint>
+                <mat-error *ngIf="storeProfile.get('user').get('username').hasError('required')">
+                  Nombre de usuario es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+
+              <!-- PASSWORD -->
+              <mat-form-field class="cCard">
+                <input matInput placeholder="Contraseña" formControlName="password"
+                       [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+                <mat-hint>Ingrese contraseña</mat-hint>
+                <mat-error *ngIf="storeProfile.get('user').get('password').hasError('required')">
+                  Contraseña es <strong>requerida</strong>
+                </mat-error>
+                <mat-error *ngIf="storeProfile.get('user').get('password').hasError('minlength')">
+                  Debe tener mas de <strong>6 caracteres</strong>
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div formGroupName="address">
+          <div class="row">
+            <div class="col-6">
+              <!-- STREET NAME -->
+              <mat-form-field class="cCard">
+                <input matInput placeholder="Calle" formControlName="street"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Ingrese calle</mat-hint>
+                <mat-error *ngIf="storeProfile.get('address').get('street').hasError('required')">
+                  Calle es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-6">
+              <!-- STREET NUMBER -->
+              <mat-form-field class="cCard">
+                <input type="number" matInput placeholder="Calle N°" formControlName="number"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Calle N°</mat-hint>
+                <mat-error *ngIf="storeProfile.get('address').get('number').hasError('required')">
+                  N° es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- POSTAL CODE -->
+          <mat-form-field class="cCard">
+            <input matInput placeholder="Codigo Postal" formControlName="postalCode"
+                   [errorStateMatcher]="matcher">
+            <mat-hint>Ingrese CP</mat-hint>
+            <mat-error *ngIf="storeProfile.get('address').get('postalCode').hasError('required')">
+              CP es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <div class="row">
+            <div class="col-6">
+
+              <!-- STATE -->
+              <mat-form-field class="cCard">
+                <mat-label>Provincia</mat-label>
+                <mat-select (selectionChange)="this.stateId=$event.value">
+                  <mat-option *ngFor="let state of states" value={{state.id}}>
+                    <div *ngIf="state.country.id == countryid">{{state.name}}</div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-6">
+              <!-- CITY -->
+              <div formGroupName="city">
+                <mat-form-field class="cCard">
+                  <mat-label>Ciudad</mat-label>
+                  <mat-select formControlName="id" [errorStateMatcher]="matcher">
+                    <div *ngFor="let city of cities">
+                      <mat-option [value]="city.id" *ngIf="stateId==city.state.id">
+                        {{city.name}}
+                      </mat-option>
+                    </div>
+                  </mat-select>
+                  <mat-error *ngIf="storeProfile.get('address').get('city').get('id').hasError('required')">
+                    Ciudad es <strong>requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div><!--FORM GROUP CITY-->
+            </div><!-- FORM GROUP ADDRESS-->
+          </div>
+        </div>
+
+
+    </form>
+
+      <!-- CARD ACTIONS-->
+      <mat-card-actions align="center">
+        <button type="submit" [disabled]="storeProfile.invalid" mat-raised-button color="primary"
+                (click)="updateStoreProfile(storeProfile.value)">Registrar
+        </button>
+      </mat-card-actions>
+
+
+
+  </mat-card-content>
+</mat-card>
+      <mat-card class="mCard">
+        <mat-card-title>Cambiar imagen</mat-card-title>
+        <input type="file" id="imgFileTypeHTML" accept=".png, .jpg, .jpeg">
+        <button mat-raised-button color="primary">Subir foto</button>
+        <mat-progress-bar mode="determinate" [value]="uploadPercent | async"></mat-progress-bar>
+        <input #imageStore type="hidden" [value]="urlImage | async">
+      </mat-card>
+
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+

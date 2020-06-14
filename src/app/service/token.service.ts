@@ -31,7 +31,6 @@ export class TokenService {
     }
     return this.http.post<Token>(this.BASE_URL+'login/refresh', token).pipe(
       tap((data)=>{
-        console.log(data);
         this.saveTokenInStorage(data.token);
         this.saveRefreshTokenInStorage(data.refresh_token);
       })
@@ -68,5 +67,16 @@ export class TokenService {
   getTokenFromStorage(): string {
     return localStorage.getItem('token');
   }
-
+  saveUsernameInStorage(username: string): void{
+    localStorage.setItem('username', username);
+  }
+  getUsernameFromStorage(){
+    return localStorage.getItem('username');
+  }
+  saveRoleInStorage(role: string){
+    localStorage.setItem('role', role);
+  }
+  getRoleFromStorage(){
+    return localStorage.getItem('role');
+  }
 }

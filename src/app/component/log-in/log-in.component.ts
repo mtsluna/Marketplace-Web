@@ -42,9 +42,11 @@ export class LogInComponent implements OnInit {
         user.password = this.loginForm.get('password').value;
         this.authenticationService.login(user).subscribe(
           data => {
-            // login successful so redirect to the lobby and save the tokebs
-            this.tokenService.saveTokenInStorage(data.token)
-            this.tokenService.saveRefreshTokenInStorage(data.refresh_token)
+            // login successful so redirect to the lobby and save the tokens
+            this.tokenService.saveTokenInStorage(data.token);
+            this.tokenService.saveRefreshTokenInStorage(data.refresh_token);
+            this.tokenService.saveUsernameInStorage(data.user.username);
+            this.tokenService.saveRoleInStorage(data.user.roles[0]);
             this.authenticationService.isLogged = true;
             this.router.navigateByUrl('lobby');
           }

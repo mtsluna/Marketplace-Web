@@ -20,4 +20,12 @@ export class AuthService {
   login(user: User) {
     return this.http.post<Token>(this.BASE_URL + 'login', user);
   }
+
+  isAuth(): boolean{
+    if(this.tokenService.getTokenFromStorage() != null){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

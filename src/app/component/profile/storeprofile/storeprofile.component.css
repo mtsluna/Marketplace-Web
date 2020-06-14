@@ -25,5 +25,17 @@ mat-card-title {
   justify-content: center;
   align-items: center;
 }
-
-
+mat-toolbar{
+  max-width: 50%;
+  alignment: left;
+  margin: 0 auto;
+}
+mat-toolbar-row{
+  font-size: 15px;
+  align-content: center;
+  height: fit-content;
+  width: auto;
+}
+.profile {
+  margin: 1vh;
+}

@@ -27,7 +27,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RegisterComponent implements OnInit {
 
-  newuser: User;
+
   matcher = new MyErrorStateMatcher();
   public registerUser: FormGroup;
   public registerStore: FormGroup;
@@ -71,13 +71,14 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(10),
         Validators.pattern("^[0-9]+$")
       ]),
-      username: new FormControl('', [
-        Validators.required
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
+      user: this.formBuilder.group({
+        username: new FormControl('', [
+          Validators.required
+        ]),
+        password: new FormControl('', [
+          Validators.required
+        ]),
+      }),
       address:this.formBuilder.group({
 
         street: new FormControl('', [
@@ -156,7 +157,7 @@ export class RegisterComponent implements OnInit {
   registerClientForm(client: any){
 
     this.clientService.post(client).subscribe((res) => {
-      console.log('Client created succesfully');
+      console.log('Client created succesfully:'+ res);
       this.router.navigateByUrl('/login');
     },
       error => {
