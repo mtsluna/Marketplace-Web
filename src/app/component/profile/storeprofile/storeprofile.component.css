@@ -9,6 +9,7 @@ mat-card-title {
 .mCard{
   margin: 0 auto;
   max-width: 500px;
+  margin-bottom: 10px;
 }
 
 .cCard{
@@ -38,4 +39,9 @@ mat-toolbar-row{
 }
 .profile {
   margin: 1vh;
+}
+img{
+  max-height: 50px;
+  max-width: 50px;
+
 }

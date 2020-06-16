@@ -19,7 +19,10 @@
   <div class="profile col-9" style="align-content: center">
     <mat-card class="mCard">
       <mat-card-content>
-        <form class="example-form" [formGroup]="userProfile">
+        <div *ngIf="onCharge == true" class="spinner">
+          <mat-spinner></mat-spinner>
+        </div>
+        <form *ngIf="created" class="example-form" [formGroup]="clientProfile">
 
 
             <div class="name-container">
@@ -30,7 +33,7 @@
                     <input matInput placeholder="Nombre" formControlName="name"
                            [errorStateMatcher]="matcher">
                     <mat-hint>Ingrese nombre</mat-hint>
-                    <mat-error *ngIf="userProfile.get('name').hasError('required')">
+                    <mat-error *ngIf="clientProfile.get('name').hasError('required')">
                       Nombre es <strong>requerido</strong>
                     </mat-error>
                   </mat-form-field>
@@ -41,7 +44,7 @@
                     <input matInput placeholder="Apellido" formControlName="surname"
                            [errorStateMatcher]="matcher">
                     <mat-hint>Ingrese apellido</mat-hint>
-                    <mat-error *ngIf="userProfile.get('surname').hasError('required')">
+                    <mat-error *ngIf="clientProfile.get('surname').hasError('required')">
                       Apellido es <strong>requerido</strong>
                     </mat-error>
                   </mat-form-field>
@@ -55,48 +58,32 @@
                 <input matInput placeholder="DNI" formControlName="dni"
                        [errorStateMatcher]="matcher">
                 <mat-hint>Ingrese DNI</mat-hint>
-                <mat-error *ngIf="userProfile.get('dni').hasError('required')">
+                <mat-error *ngIf="clientProfile.get('dni').hasError('required')">
                   DNI es <strong>requerido</strong>
                 </mat-error>
-                <mat-error *ngIf="userProfile.get('dni').hasError('maxlength')">
+                <mat-error *ngIf="clientProfile.get('dni').hasError('maxlength')">
                   Debe tener menos de <strong>10 caracteres</strong>
                 </mat-error>
-                <mat-error *ngIf="userProfile.get('dni').hasError('pattern')">
+                <mat-error *ngIf="clientProfile.get('dni').hasError('pattern')">
                   DNI deben ser solo<strong>numeros</strong>
                 </mat-error>
               </mat-form-field>
             </div>
 
+
             <div class="row">
+              <div formGroupName="user">
               <div class="col-6">
                 <!-- USERNAME -->
                 <mat-form-field class="cCard">
                   <input matInput placeholder="Nombre de usuario" formControlName="username"
                          [errorStateMatcher]="matcher">
                   <mat-hint>Ingrese nombre de usuario</mat-hint>
-                  <mat-error *ngIf="userProfile.get('username').hasError('required')">
+                  <mat-error *ngIf="clientProfile.get('user').get('username').hasError('required')">
                     Nombre de usuario es <strong>requerido</strong>
                   </mat-error>
                 </mat-form-field>
               </div>
-
-              <div class="col-6">
-                <!-- PASSWORD -->
-                <mat-form-field class="cCard">
-                  <input matInput placeholder="Contraseña" formControlName="password"
-                         [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
-                  <mat-hint>Ingrese contraseña</mat-hint>
-                  <mat-error *ngIf="userProfile.get('password').hasError('required')">
-                    Contraseña es <strong>requerida</strong>
-                  </mat-error>
-                  <mat-error *ngIf="userProfile.get('password').hasError('minlength')">
-                    Debe tener mas de <strong>6 caracteres</strong>
-                  </mat-error>
-                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                          [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                </mat-form-field>
               </div>
             </div>
 
@@ -110,7 +97,7 @@
                     <input matInput placeholder="Calle" formControlName="street"
                            [errorStateMatcher]="matcher">
                     <mat-hint>Ingrese calle</mat-hint>
-                    <mat-error *ngIf="userProfile.get('address').get('street').hasError('required')">
+                    <mat-error *ngIf="clientProfile.get('address').get('street').hasError('required')">
                       Calle es <strong>requerido</strong>
                     </mat-error>
                   </mat-form-field>
@@ -121,7 +108,7 @@
                     <input type="number" matInput placeholder="Calle N°" formControlName="number"
                            [errorStateMatcher]="matcher">
                     <mat-hint>Calle N°</mat-hint>
-                    <mat-error *ngIf="userProfile.get('address').get('number').hasError('required')">
+                    <mat-error *ngIf="clientProfile.get('address').get('number').hasError('required')">
                       N° es <strong>requerido</strong>
                     </mat-error>
                   </mat-form-field>
@@ -132,13 +119,13 @@
                 <input matInput placeholder="Codigo Postal" formControlName="postalCode"
                        [errorStateMatcher]="matcher">
                 <mat-hint>Ingrese CP</mat-hint>
-                <mat-error *ngIf="userProfile.get('address').get('postalCode').hasError('required')">
+                <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('required')">
                   CP es <strong>requerido</strong>
                 </mat-error>
-                <mat-error *ngIf="userProfile.get('address').get('postalCode').hasError('maxLength')">
+                <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('maxLength')">
                   Máximo <strong>5 digitos</strong>
                 </mat-error>
-                <mat-error *ngIf="userProfile.get('address').get('postalCode').hasError('pattern')">
+                <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('pattern')">
                   Deben contener solo <strong>numeros</strong>
                 </mat-error>
               </mat-form-field>
@@ -149,8 +136,8 @@
                   <!-- STATE -->
                   <mat-form-field class="cCard">
                     <mat-label>Provincia</mat-label>
-                    <mat-select (selectionChange)="this.stateId=$event.value">
-                      <mat-option *ngFor="let state of states" value={{state.id}}>
+                    <mat-select (selectionChange)="this.stateId=$event.value" [value]="stateId">
+                      <mat-option *ngFor="let state of states" [value]="state.id">
                         <div *ngIf="state.country.id == countryid">{{state.name}}</div>
                       </mat-option>
                     </mat-select>
@@ -169,7 +156,7 @@
                           </mat-option>
                         </div>
                       </mat-select>
-                      <mat-error *ngIf="userProfile.get('address').get('city').get('id').hasError('required')">
+                      <mat-error *ngIf="clientProfile.get('address').get('city').get('id').hasError('required')">
                         Ciudad es <strong>requerido</strong>
                       </mat-error>
                     </mat-form-field>
@@ -181,8 +168,8 @@
 
             <!-- CARD ACTIONS-->
             <mat-card-actions align="center">
-              <button pButton type="submit" [disabled]="userProfile.invalid && !userProfile.dirty" mat-raised-button color="primary"
-                      (click)="updateClientProfile(userProfile.value)">Registrar
+              <button pButton type="submit" [disabled]="clientProfile.invalid || !clientProfile.dirty" mat-raised-button color="primary"
+                      (click)="updateClientProfile(clientProfile.value)">Registrar
               </button>
             </mat-card-actions>
 

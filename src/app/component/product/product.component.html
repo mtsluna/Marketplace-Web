@@ -1,0 +1,20 @@
+<div class="card-margin" fxFlex.lt-lg="0 1 calc(25%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)">
+  <mat-card class="product-card">
+    <img class="product-img" mat-card-image src="{{(productCard.image != null && productCard.image.url != null) ? productCard.image.url : 'https://www.salud.mapfre.es/wp-content/uploads/2018/05/default-img-1.gif'}}">
+    <mat-card-title>{{productCard.name}}</mat-card-title>
+    <mat-card-subtitle>{{productCard.description}}</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+      <div class="product-btn">
+        <button class="product-btn" mat-stroked-button (click)="addProduct(productCard)">· {{productCard.price | currency}} · Añadir</button>
+        <button (click)="openDialog(productCard)" color="primary" mat-icon-button aria-label="Editar">
+          <mat-icon>edit_text</mat-icon>
+        </button>
+        <button color="warn" mat-icon-button aria-label="Eliminar">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

@@ -4,10 +4,10 @@ import {TokenService} from "./token.service";
 import {Token} from "../model/token";
 import {User} from "../model/user";
 
+
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
   BASE_URL = 'https://udamarket.herokuapp.com/api/';
   isLogged = false;
@@ -28,4 +28,5 @@ export class AuthService {
       return false;
     }
   }
+
 }

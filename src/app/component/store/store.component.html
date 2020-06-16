@@ -7,6 +7,7 @@
     </mat-card>
   </div>
   <h2>Productos</h2>
+  <button mat-raised-button color="primary" (click)="openDialog()">Producto +</button>
 
   <div class="container-fluid">
     <mat-divider></mat-divider>
@@ -18,19 +19,7 @@
   </div>
 
   <div class="products" *ngIf="store.products.length > 0" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="center">
-    <div class="card-margin" *ngFor="let product of store.products" fxFlex.lt-lg="0 1 calc(25%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="0 1 calc(100%)">
-      <mat-card class="product-card">
-        <img class="product-img" mat-card-image src="{{(product.image != null && product.image.url != null) ? product.image.url : 'https://www.salud.mapfre.es/wp-content/uploads/2018/05/default-img-1.gif'}}">
-        <mat-card-title>{{product.name}}</mat-card-title>
-        <mat-card-subtitle>{{product.description}}</mat-card-subtitle>
-        <mat-divider></mat-divider>
-        <mat-card-actions>
-          <div class="product-btn">
-            <button class="product-btn" mat-stroked-button (click)="addProduct(product)">· {{product.price | currency}} · Añadir</button>
-          </div>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+   <app-product *ngFor="let product of store.products" [productCard]="product"></app-product>
   </div>
 </div>
 <div class="store-container" *ngIf="onCharge == true">

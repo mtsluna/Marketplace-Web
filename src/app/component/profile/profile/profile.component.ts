@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   type: String = 'store';
-  constructor() { }
+  constructor() {
+    if(localStorage.getItem('role') == 'ROLE_CLIENT'){
+      this.type = 'client';
+    }else{
+      this.type = 'store';
+    }
+  }
 
   ngOnInit(): void {
   }

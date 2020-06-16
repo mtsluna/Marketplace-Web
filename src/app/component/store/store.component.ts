@@ -4,6 +4,10 @@ import {Store} from "../../model/store";
 import {StoreService} from "../../service/store.service";
 import {Product} from "../../model/product";
 import {CartService} from '../../service/cart.service';
+import {ProductComponent} from "../product/product.component";
+import {MatDialog} from "@angular/material/dialog";
+import {CartComponent} from "../shared/cart/cart.component";
+import {ProductFormComponent} from "../product/product-form/product-form.component";
 
 @Component({
   selector: 'app-store',
@@ -13,10 +17,11 @@ import {CartService} from '../../service/cart.service';
 export class StoreComponent implements OnInit {
   store: Store;
   onCharge: boolean = true;
+  isOpen: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private storeService: StoreService,
-              private cartService: CartService) {
+              private dialog: MatDialog) {
 
     this.onCharge = true;
 
@@ -30,9 +35,20 @@ export class StoreComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  addProduct(product: Product){
-    this.cartService.addProduct(product)
+  openDialog(){
+    if(this.isOpen == false){
+      const dialogRef = this.dialog.open(ProductFormComponent, {
+        panelClass: 'app-full-bleed-dialog',
+        data: {type: 'create',
+               storeId: this.store.id
+        }
+      });
+      this.isOpen = true
+      dialogRef.afterClosed().subscribe(result => {
+        this.store.products.push(result);
+        this.isOpen = false;
+      });
+    }
   }
 
 }
