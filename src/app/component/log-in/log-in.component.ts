@@ -36,7 +36,6 @@ export class LogInComponent implements OnInit {
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.loginForm.valid) {
-      try {
         const user = new User()
         user.username = this.loginForm.get('username').value;
         user.password = this.loginForm.get('password').value;
@@ -49,11 +48,11 @@ export class LogInComponent implements OnInit {
             this.tokenService.saveRoleInStorage(data.user.roles[0]);
             this.authenticationService.isLogged = true;
             this.router.navigateByUrl('lobby');
-          }
+          },
+          (error => {
+            this.loginInvalid = true;
+          })
         )
-      } catch (err) {
-        this.loginInvalid = true;
-      }
     } else {
       this.formSubmitAttempt = true;
     }

@@ -67,7 +67,9 @@ import { ProductFormComponent } from './component/product/product-form/product-f
     StoreAreaTableComponent,
     StoreAreaTableModalComponent,
     ProductComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ClientprofileComponent,
+    StoreprofileComponent
   ],
   imports: [
     BrowserModule,

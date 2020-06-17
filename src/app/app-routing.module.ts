@@ -10,7 +10,6 @@ import {StoreAreaTableComponent} from './component/store-area-table/store-area-t
 import {CanActivateLoginGuard} from "./guards/can-activate-login-guard.service";
 
 const routes: Routes = [
-  //{ path: 'lobby', component: LobbyComponent,  canActivate: [CanActivateLoginGuard] },
   { path: 'lobby', component: LobbyComponent },
   { path: 'register', component: RegisterComponent},
   //{ path: 'store/:id', component: StoreComponent},
