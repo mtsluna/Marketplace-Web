@@ -16,13 +16,18 @@ export class NavComponent implements OnInit {
   @Input() products: Product[]
   isOpen: boolean = false
   items: number = 0
-
+  isLogged: boolean = false;
   constructor(public dialog: MatDialog,
               private cartService: CartService,
               private tokenService: TokenService,
               private authService: AuthService) {
-
+    if (this.authService.isAuth()) {
+      this.isLogged = true;
+      console.log(this.isLogged);
+    }
   }
+
+
 
   ngOnInit(): void {
     this.cartService.getProducts().subscribe((data)=>{

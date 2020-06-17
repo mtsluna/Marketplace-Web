@@ -32,13 +32,20 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {CartComponent} from './component/shared/cart/cart.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import { ClientprofileComponent } from './component/profile/clientprofile/clientprofile.component';
+import {ConfirmDialogModule} from "primeng";
 import {LogInComponent} from './component/log-in/log-in.component';
 import {AuthService} from "./service/auth.service";
 import { StoreAreaTableComponent } from './component/store-area-table/store-area-table.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { StoreAreaTableModalComponent } from './component/store-area-table/store-area-table-modal/store-area-table-modal.component';
+import { StoreprofileComponent } from './component/profile/storeprofile/storeprofile.component';
+import { ProfileComponent } from './component/profile/profile/profile.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { CanActivateLoginGuard } from './guards/can-activate-login-guard.service';
+import { ProductComponent } from './component/product/product.component';
+import { ProductFormComponent } from './component/product/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -50,10 +57,17 @@ import { CanActivateLoginGuard } from './guards/can-activate-login-guard.service
     FooterComponent,
     NavComponent,
     StoreComponent,
+    ClientprofileComponent,
+    StoreComponent,
+    LogInComponent,
+    StoreprofileComponent,
+    ProfileComponent,
     LogInComponent,
     CartComponent,
     StoreAreaTableComponent,
-    StoreAreaTableModalComponent
+    StoreAreaTableModalComponent,
+    ProductComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +93,9 @@ import { CanActivateLoginGuard } from './guards/can-activate-login-guard.service
     MatTableModule,
     MatDialogModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressBarModule,
+    ConfirmDialogModule
   ],
   providers: [
     AuthService,
