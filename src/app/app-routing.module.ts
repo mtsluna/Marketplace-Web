@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   //{ path: 'store/:id', component: StoreComponent},
   { path: 'store/:id', component: StoreComponent,  canActivate: [CanActivateLoginGuard] },
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent,  canActivate: [CanActivateLoginGuard] },
   { path: 'login', component: LogInComponent},
   { path: 'admin/storearea', component: StoreAreaTableComponent},
   { path: '**', component: LobbyComponent}

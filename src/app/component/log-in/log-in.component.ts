@@ -47,7 +47,14 @@ export class LogInComponent implements OnInit {
             this.tokenService.saveUsernameInStorage(data.user.username);
             this.tokenService.saveRoleInStorage(data.user.roles[0]);
             this.authenticationService.isLogged = true;
-            this.router.navigateByUrl('lobby');
+
+            //Si el usuario triggereo el login desde el profile
+            if (localStorage.getItem('launchedLoginFrom') == 'profile') {
+              this.router.navigateByUrl('profile');
+            } else {
+              //Fallback. Podriamos manegar otros casos
+              this.router.navigateByUrl('lobby');
+            }
           },
           (error => {
             this.loginInvalid = true;
