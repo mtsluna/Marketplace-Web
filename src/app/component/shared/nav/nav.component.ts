@@ -23,13 +23,10 @@ export class NavComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private cartService: CartService,
               private tokenService: TokenService,
-              private authService: AuthService,
+              public authService: AuthService,
               private storeService: StoreService,
               private router: Router) {
-    if (this.authService.isAuth()) {
-      this.isLogged = true;
-      console.log(this.isLogged);
-    }
+
   }
 
 
@@ -69,4 +66,5 @@ export class NavComponent implements OnInit {
       this.router.navigate(['/store/'+data[0].id]);
     })
   }
+
 }

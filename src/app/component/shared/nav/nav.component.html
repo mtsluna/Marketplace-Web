@@ -14,22 +14,37 @@
     </ul>
   </div>
   <form class="form-inline">
+    <div *ngIf="this.authService.isLogged">
+      <a routerLink="/purchases">
+        Mis compras
+      </a>
+    </div>
     <div>
-      <button style="outline:none;" mat-icon-button (click)="openDialog()">
+      <button *ngIf="this.authService.isLogged" style="outline:none;" mat-icon-button (click)="openDialog()">
         <mat-icon matBadge="{{items}}" matBadgeColor="warn" class="black">shopping_cart</mat-icon>
       </button>
     </div>
     <div class="nav-icon"></div>
-    <div>
+    <div *ngIf="this.authService.isLogged">
       <a routerLink="/profile">
         <mat-icon class="black">person</mat-icon>
       </a>
     </div>
     <div class="nav-icon"></div>
-    <div>
-      <a routerLink="/logout" (click)="logout()">
+    <div *ngIf="this.authService.isLogged">
+      <a routerLink="/login" (click)="logout()">
         <mat-icon class="black">logout</mat-icon>
       </a>
     </div>
+    <div *ngIf="!this.authService.isLogged" class="pal">
+      <a routerLink="/login">
+        Iniciar sesion
+      </a>
+    </div>
+    <div *ngIf="!this.authService.isLogged" class="pal">
+    <a routerLink="/register">
+        Registrar
+    </a>
+  </div>
   </form>
 </nav>

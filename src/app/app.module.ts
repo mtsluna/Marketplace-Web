@@ -47,8 +47,10 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { CanActivateLoginGuard } from './guards/can-activate-login-guard.service';
 import { ProductComponent } from './component/product/product.component';
 import { ProductFormComponent } from './component/product/product-form/product-form.component';
+import { PurchasesComponent } from './component/purchases/purchases.component';
 import {StoreprofileComponent} from './component/profile/storeprofile/storeprofile.component';
 import {MaterialFileInputModule} from 'ngx-material-file-input';
+import { PurchaseDetailsComponent } from './component/purchases/purchase-details/purchase-details.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import {MaterialFileInputModule} from 'ngx-material-file-input';
     FooterComponent,
     NavComponent,
     StoreComponent,
+    ClientprofileComponent,
     LogInComponent,
     ProfileComponent,
     CartComponent,
@@ -69,8 +72,9 @@ import {MaterialFileInputModule} from 'ngx-material-file-input';
     StoreAreaTableModalComponent,
     ProductAreaTableComponent,
     ProductAreaTableModalComponent,
-    ClientprofileComponent,
-    StoreprofileComponent
+    PurchasesComponent,
+    StoreprofileComponent,
+    PurchaseDetailsComponent
   ],
   imports: [
     BrowserModule,

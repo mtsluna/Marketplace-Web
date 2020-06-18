@@ -1,0 +1,8 @@
+<div *ngIf="this.details != null">
+<div *ngFor="let detail of details">
+ <h3> - Producto: {{detail.product.id}} / Cantidad: <strong>{{detail.quantity}}</strong></h3>
+</div>
+</div>
+<div *ngIf="this.details == null">
+  <h2>Esta compra no tiene detalle</h2>
+</div>

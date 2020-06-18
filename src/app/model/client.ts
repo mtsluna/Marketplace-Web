@@ -9,7 +9,7 @@ export class Client {
   surname: string;
   dni: number;
   address: Address;
-  purchase: Purchase[] = [];
+  purchases: Purchase[] = [];
   user: User;
 
 }
