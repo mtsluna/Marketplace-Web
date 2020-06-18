@@ -20,6 +20,7 @@ export class StoreAreaTableComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
   length = 0;
   page = 0;
+  pages = 1;
   onCharge = false;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -45,6 +46,7 @@ export class StoreAreaTableComponent implements OnInit, AfterViewInit {
 
   onPaginateChange(event) {
     this.getStoreAreas(event.pageIndex + 1)
+    this.pages = event.pageIndex + 1
   }
 
   getStoreAreas(page: number){
@@ -52,6 +54,7 @@ export class StoreAreaTableComponent implements OnInit, AfterViewInit {
     this.storeAreaService.getAllWithPagination(page).subscribe((data)=>{
       this.dataSource.data = data.body as ProductArea[]
       this.length = +data.headers.get('Content-Range').split('/')[1]
+      this.paginator.length = +data.headers.get('Content-Range').split('/')[1]
       this.onCharge = false
     })
   }
@@ -77,14 +80,22 @@ export class StoreAreaTableComponent implements OnInit, AfterViewInit {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
-  openDialog(element ?: StoreArea) {
+  openDialog(element: StoreArea = new StoreArea()) {
+    (element == undefined) ? element = new StoreArea() : element;
     const dialogRef = this.dialog.open(StoreAreaTableModalComponent, {
       data: element
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.getStoreAreas(this.pages)
     });
+  }
+
+  public deleteStoreArea(storeArea: StoreArea){
+    this.storeAreaService.deleteById(storeArea.id).subscribe((data)=>{
+      this.dataSource.data.slice(this.dataSource.data.indexOf(storeArea), 1)
+      this.getStoreAreas(this.pages)
+    })
   }
 
 }

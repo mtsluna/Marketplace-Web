@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Product} from "../../../model/product";
@@ -17,15 +17,20 @@ import {ProductComponent} from "../product.component";
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
+  onSave: boolean = false;
   title: string;
+  imageForm: FormGroup;
   productForm: FormGroup;
   product: Product;
   productAreas: ProductArea[];
   matcher = new MyErrorStateMatcher();
   // IMAGE ATTRIBUTES TO MANAGE UPLOAD
   imageToUpload: any;
+  isPresent: boolean = false;
   image: Image;
   uploadPercent = '0';
+  @Output() productChange = new EventEmitter<Product>();
+  @Output() productDelete = new EventEmitter<number>();
   constructor(private formBuilder: FormBuilder,
               private productAreaService: ProductAreaService,
               private imageService: ImageService,
@@ -38,17 +43,27 @@ export class ProductFormComponent implements OnInit {
     this.getProductAreas();
     if(this.data.type=='create'){
       this.buildFormtoCreate();
+      this.buildImageForm();
       this.title='Nuevo Producto';
     }else{
       this.product = data.product;
       this.title = 'Editar producto';
-      console.log(this.product);
       this.buildFormtoEdit();
+      this.buildImageForm();
     }
   }
 
   ngOnInit(): void {
   }
+
+  buildImageForm(){
+    this.imageForm = this.formBuilder.group({
+      file: new FormControl('', [
+        Validators.required
+      ])
+    })
+  }
+
   buildFormtoCreate(){
     this.productForm = this.formBuilder.group({
       name: new FormControl('',[
@@ -67,7 +82,7 @@ export class ProductFormComponent implements OnInit {
         ])
       }),
       image: this.formBuilder.group({
-        id: new FormControl('',[
+        file: new FormControl(null, [
           Validators.required
         ])
       }),
@@ -92,7 +107,8 @@ export class ProductFormComponent implements OnInit {
         Validators.required
       ]),
       image: this.formBuilder.group({
-        id: new FormControl(this.product.image.id,[
+        id: new FormControl(this.product.image.id, []),
+        file: new FormControl(this.product.image, [
           Validators.required
         ])
       }),
@@ -116,41 +132,48 @@ export class ProductFormComponent implements OnInit {
   onFileSelected(e: any){
     this.imageToUpload = e.target.files[0];
     this.uploadPercent = '0';
+    this.isPresent = true;
   }
-  onUpload(){
+
+  submitProduct(product: any){
+    this.onSave = true;
     this.uploadPercent = '50';
     const formData = new FormData();
     formData.append('file', this.imageToUpload);
-    this.imageService.post(formData).subscribe( async(data) => {
-      console.log('Image uploaded succesfully');
-      this.uploadPercent = '100';
-      let id = await data.id;
-      this.productForm.get('image').get('id').setValue(id);
-    },error => {
-      console.log('An error has ocurred: '+ error.message);
-      this.uploadPercent = '0';
-      }
-    );
-  }
-  submitProduct(product: any){
-    if(this.title == 'Nuevo Producto'){
-      // WE CREATE THE PRODUCT
-      this.productService.post(product).subscribe( res =>{
-        console.log('Product created succesfully');
-        this.dialogStore.close();
-      }, error => {
-        console.log('An error has ocurred: '+ error.message);
-      });
-
-    }else{
-      // WE UPDATE THE PRODUCT
+    console.log("1-"+product.image.id)
+    console.log("2-"+this.productForm.get('image').get('file').value)
+    if(this.imageToUpload == null){
       this.productService.putById(product.id, product).subscribe( res => {
-        console.log('Product updated succesfuly');
-        this.dialogProd.close();
+        this.dialogProd.close(res);
       }, error => {
-        console.log('An error has ocurred: '+ error.message);
-        console.log(product);
+
       });
+    }
+    else{
+      this.imageService.post(formData).subscribe( async(data) => {
+          this.uploadPercent = '100';
+          let id = await data.id;
+          //this.productForm.get('image').get('id').setValue(id);
+          product.image.id = id;
+          this.isPresent = true
+          if(this.title == 'Nuevo Producto'){
+            this.productService.post(product).subscribe( res =>{
+              this.dialogStore.close(res);
+            }, error => {
+
+            });
+          } else {
+            this.productService.putById(product.id, product).subscribe( res => {
+              this.dialogProd.close(res);
+            }, error => {
+
+            });
+          }
+        },error => {
+          this.isPresent = true;
+          this.uploadPercent = '0';
+        }
+      );
     }
   }
 }

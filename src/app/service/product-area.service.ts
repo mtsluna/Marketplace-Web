@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {GenericService} from "./generic.service";
-import {ProductArea} from "../model/productArea";
 import {HttpClient} from "@angular/common/http";
 import {TokenService} from "./token.service";
+import {ProductArea} from '../model/productArea';
 
 @Injectable({
   providedIn: 'root'

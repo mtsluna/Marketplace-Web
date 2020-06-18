@@ -6,8 +6,12 @@
       <mat-card-subtitle>{{store.address.street}} {{store.address.number}}, {{store.address.city.state.name}}, {{store.address.city.state.name}}, {{store.address.city.state.country.name}}</mat-card-subtitle>
     </mat-card>
   </div>
-  <h2>Productos</h2>
-  <button mat-raised-button color="primary" (click)="openDialog()">Producto +</button>
+  <h2>Productos
+    <span>
+      <button *ngIf="rol == 'ROLE_BUSINESS' && username == store.user.username" mat-stroked-button class="add" (click)="openDialog()">AGREGAR</button>
+    </span>
+  </h2>
+
 
   <div class="container-fluid">
     <mat-divider></mat-divider>
@@ -19,7 +23,7 @@
   </div>
 
   <div class="products" *ngIf="store.products.length > 0" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="center">
-   <app-product *ngFor="let product of store.products" [productCard]="product"></app-product>
+   <app-product (productEventDelete)="delete($event)" (productEvent)="replace($event)" [username]="store.user.username" [rol]="rol" *ngFor="let product of store.products" [productCard]="product"></app-product>
   </div>
 </div>
 <div class="store-container" *ngIf="onCharge == true">

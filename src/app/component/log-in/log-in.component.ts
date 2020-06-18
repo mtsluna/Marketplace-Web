@@ -36,6 +36,7 @@ export class LogInComponent implements OnInit {
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.loginForm.valid) {
+      try {
         const user = new User()
         user.username = this.loginForm.get('username').value;
         user.password = this.loginForm.get('password').value;
@@ -47,19 +48,12 @@ export class LogInComponent implements OnInit {
             this.tokenService.saveUsernameInStorage(data.user.username);
             this.tokenService.saveRoleInStorage(data.user.roles[0]);
             this.authenticationService.isLogged = true;
-
-            //Si el usuario triggereo el login desde el profile
-            if (localStorage.getItem('launchedLoginFrom') == 'profile') {
-              this.router.navigateByUrl('profile');
-            } else {
-              //Fallback. Podriamos manegar otros casos
-              this.router.navigateByUrl('lobby');
-            }
-          },
-          (error => {
-            this.loginInvalid = true;
-          })
+            this.router.navigateByUrl('lobby');
+          }
         )
+      } catch (err) {
+        this.loginInvalid = true;
+      }
     } else {
       this.formSubmitAttempt = true;
     }

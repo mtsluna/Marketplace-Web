@@ -40,12 +40,15 @@ import { StoreAreaTableComponent } from './component/store-area-table/store-area
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { StoreAreaTableModalComponent } from './component/store-area-table/store-area-table-modal/store-area-table-modal.component';
-import { StoreprofileComponent } from './component/profile/storeprofile/storeprofile.component';
+import { ProductAreaTableComponent } from './component/product-area-table/product-area-table.component';
+import { ProductAreaTableModalComponent } from './component/product-area-table/product-area-table-modal/product-area-table-modal.component';
 import { ProfileComponent } from './component/profile/profile/profile.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { CanActivateLoginGuard } from './guards/can-activate-login-guard.service';
 import { ProductComponent } from './component/product/product.component';
 import { ProductFormComponent } from './component/product/product-form/product-form.component';
+import {StoreprofileComponent} from './component/profile/storeprofile/storeprofile.component';
+import {MaterialFileInputModule} from 'ngx-material-file-input';
 
 @NgModule({
   declarations: [
@@ -57,17 +60,15 @@ import { ProductFormComponent } from './component/product/product-form/product-f
     FooterComponent,
     NavComponent,
     StoreComponent,
-    ClientprofileComponent,
-    StoreComponent,
     LogInComponent,
-    StoreprofileComponent,
     ProfileComponent,
-    LogInComponent,
     CartComponent,
     StoreAreaTableComponent,
-    StoreAreaTableModalComponent,
     ProductComponent,
     ProductFormComponent,
+    StoreAreaTableModalComponent,
+    ProductAreaTableComponent,
+    ProductAreaTableModalComponent,
     ClientprofileComponent,
     StoreprofileComponent
   ],
@@ -97,7 +98,8 @@ import { ProductFormComponent } from './component/product/product-form/product-f
     MatPaginatorModule,
     MatSortModule,
     MatProgressBarModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    MaterialFileInputModule
   ],
   providers: [
     AuthService,

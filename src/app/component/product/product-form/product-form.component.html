@@ -1,75 +1,97 @@
-<form [formGroup]="productForm">
-  <h2>{{this.title}}</h2>
-  <mat-divider></mat-divider>
+<div class="container">
+  <form [formGroup]="productForm">
+    <h2>{{this.title}}</h2>
+    <div class="margin-progress">
+      <mat-progress-bar mode="determinate" [value]="uploadPercent"></mat-progress-bar>
+    </div>
 
-  <!-- PRODUCT NAME -->
-  <mat-form-field class="cCard">
-    <input matInput placeholder="Nombre producto" formControlName="name"
-           [errorStateMatcher]="matcher">
-    <mat-hint>Ingrese nombre producto</mat-hint>
-    <mat-error *ngIf="productForm.get('name').hasError('required')">
-      Nombre es <strong>requerido</strong>
-    </mat-error>
-  </mat-form-field>
-
-  <!-- PRODUCT DESCRIPTION -->
-  <mat-form-field class="cCard">
-    <textarea matInput placeholder="Descripcion" formControlName="description"
-              [errorStateMatcher]="matcher"></textarea>
-    <mat-hint>Ingrese descripcion del producto</mat-hint>
-    <mat-error *ngIf="productForm.get('description').hasError('required')">
-      Descripcion es <strong>requerida</strong>
-    </mat-error>
-  </mat-form-field>
-
-  <!-- PRODUCT PRICE -->
-  <mat-form-field class="cCard">
-      <mat-label>Precio unitario</mat-label>
-      <input matInput type="number" class="example-right-align" formControlName="price">
-      <span matPrefix>$&nbsp;</span>
-      <span matSuffix>.00</span>
-    <mat-hint>Ingrese precio producto</mat-hint>
-    <mat-error *ngIf="productForm.get('price').hasError('required')">
-      Precio es <strong>requerido</strong>
-    </mat-error>
-  </mat-form-field>
-
-
-  <!-- STORE ID
-  <div formGroupName="store">
-<input type="hidden" formControlName="id">
-  </div>-->
-
-
-  <!-- PRODUCT IMAGE -->
-  <div formGroupName="image">
-  <input type="file" id="imgFileTypeHTML" accept=".png, .jpg, .jpeg" (change)="onFileSelected($event)">
-  <button mat-raised-button color="primary" (click)="onUpload()">Subir foto</button>
-    <input formControlName="id" type="hidden" [value]="productForm.get('image').get('id').value">
-  <mat-progress-bar mode="determinate" [value]="uploadPercent"></mat-progress-bar>
-    <mat-error *ngIf="productForm.get('image').get('id').hasError('required')">
-      Imagen es <strong>requerida</strong>
-    </mat-error>
-  </div>
-
-  <!-- PRODUCT AREA -->
-  <div formGroupName="area">
-    <mat-form-field class="cCard">
-      <mat-label>Tipo producto</mat-label>
-      <mat-select formControlName="id" [errorStateMatcher]="matcher">
-        <div *ngFor="let area of productAreas">
-          <mat-option [value]="area.id">
-            {{area.name}}
-          </mat-option>
-        </div>
-      </mat-select>
-      <mat-error *ngIf="productForm.get('area').get('id').hasError('required')">
-        Area es <strong>requerida</strong>
+    <!-- PRODUCT NAME -->
+    <mat-form-field class="cCard w-100">
+      <input matInput placeholder="Nombre producto" formControlName="name"
+             [errorStateMatcher]="matcher">
+      <mat-hint>Ingrese nombre producto</mat-hint>
+      <mat-error *ngIf="productForm.get('name').hasError('required')">
+        Nombre es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
-  </div><!--FORM GROUP PRODUCT AREA-->
 
-  <button type="submit" [disabled]="productForm.invalid || !productForm.dirty" mat-raised-button color="primary"
-          (click)="submitProduct(productForm.value)">Enviar
-  </button>
-</form>
+    <!-- PRODUCT DESCRIPTION -->
+    <mat-form-field class="cCard w-100">
+      <textarea matInput placeholder="Descripcion" formControlName="description"
+                [errorStateMatcher]="matcher"></textarea>
+      <mat-hint>Ingrese descripcion del producto</mat-hint>
+      <mat-error *ngIf="productForm.get('description').hasError('required')">
+        Descripcion es <strong>requerida</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- PRODUCT PRICE -->
+    <mat-form-field class="cCard w-100">
+        <mat-label>Precio unitario</mat-label>
+        <input matInput type="number" class="example-right-align" formControlName="price">
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>.00</span>
+      <mat-hint>Ingrese precio producto</mat-hint>
+      <mat-error *ngIf="productForm.get('price').hasError('required')">
+        Precio es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- STORE ID
+    <div formGroupName="store">
+  <input type="hidden" formControlName="id">
+    </div>-->
+
+
+    <!-- PRODUCT IMAGE -->
+<!--    <div formGroupName="image" class="w-100">-->
+<!--    <input type="file" id="imgFileTypeHTML" accept=".png, .jpg, .jpeg" (change)="onFileSelected($event)">-->
+<!--      <ngx-mat-file-input accept=".png, .jpg, .jpeg" placeholder="Subir archivo" (change)="onFileSelected($event)"></ngx-mat-file-input>-->
+<!--      <mat-form-field appearance="standard">-->
+<!--        <mat-label>Subir archivo</mat-label>-->
+<!--        <mat-icon matSuffix>attach_file</mat-icon>-->
+<!--      </mat-form-field>-->
+<!--    <button mat-raised-button color="primary" (click)="onUpload()">Subir foto</button>-->
+<!--      <input formControlName="id" type="hidden" [value]="productForm.get('image').get('id').value">-->
+<!--    <mat-progress-bar mode="determinate" [value]="uploadPercent"></mat-progress-bar>-->
+<!--      <mat-error *ngIf="productForm.get('image').get('id').hasError('required')">-->
+<!--        Imagen es <strong>requerida</strong>-->
+<!--      </mat-error>-->
+<!--    </div>-->
+
+<!--    <form [formGroup]="imageForm">-->
+    <div formGroupName="image">
+      <mat-form-field class="w-100">
+        <mat-label>Imagen</mat-label>
+        <ngx-mat-file-input formControlName="file" accept=".png, .jpg, .jpeg" (change)="onFileSelected($event)" required></ngx-mat-file-input>
+        <mat-icon matSuffix>attach_file</mat-icon>
+        <mat-error *ngIf="productForm.get('image').get('file').hasError('required')">
+          Imagen es <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+<!--    </form>-->
+
+    <!-- PRODUCT AREA -->
+    <div formGroupName="area">
+      <mat-form-field class="cCard w-100">
+        <mat-label>Tipo producto</mat-label>
+        <mat-select formControlName="id" [errorStateMatcher]="matcher">
+          <div *ngFor="let area of productAreas">
+            <mat-option [value]="area.id">
+              {{area.name}}
+            </mat-option>
+          </div>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('area').get('id').hasError('required')">
+          Area es <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
+    </div><!--FORM GROUP PRODUCT AREA-->
+
+    <button class="align-items-center" type="submit" [disabled]="onSave == true || productForm.invalid || !productForm.dirty" mat-raised-button color="primary"
+            (click)="submitProduct(productForm.value)">Enviar
+    </button>
+  </form>
+</div>

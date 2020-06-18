@@ -8,6 +8,7 @@
 .store{
   max-height: 100%;
   position: relative;
+  padding-bottom: 40px;
 }
 .container-fluid{
   position: relative;
@@ -58,4 +59,8 @@
 
 .card-margin{
   margin: 1vh;
+}
+
+.add{
+  color: green;
 }

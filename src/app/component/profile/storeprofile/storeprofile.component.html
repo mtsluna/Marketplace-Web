@@ -1,33 +1,26 @@
-<div class="profile">
-  <div class="row">
-    <div class="col-3">
-      <mat-toolbar color="warn">
-        <mat-toolbar-row>
-          <span>Perfil</span>
-          <mat-icon class="example-icon" aria-hidden="false" aria-label="Perfil">face</mat-icon>
-        </mat-toolbar-row>
-
-        <mat-toolbar-row>
-          <span>Compras</span>
-          <span class="example-spacer"></span>
-          <mat-icon class="example-icon" aria-hidden="false" aria-label="Compras">shopping_cart</mat-icon>
-        </mat-toolbar-row>
-
-
-      </mat-toolbar>
-    </div>
-    <div class="profile col-6" style="align-content: center">
-
-<mat-card class="mCard">
-  <mat-card-content>
-    <div *ngIf="onCharge == true" class="spinner">
-      <mat-spinner></mat-spinner>
-    </div>
-    <form *ngIf="created" class="example-form" [formGroup]="storeProfile">
-
+<div *ngIf="onCharge == true" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+<div [hidden]="onCharge == true" class="profile">
+  <mat-card class="mCard">
+    <mat-card-content>
+      <div class="">
+        <img class="img-size" mat-card-image
+             src="{{(this.store.image != null && this.store.image.url != null) ? this.store.image.url : 'https://www.salud.mapfre.es/wp-content/uploads/2018/05/default-img-1.gif'}}">
+        <mat-progress-bar mode="determinate" [value]="uploadPercent"></mat-progress-bar>
+        <mat-form-field class="w-75">
+          <ngx-mat-file-input accept=".png, .jpg, .jpeg" class="w-75" formControlName="basicfile"
+                              placeholder="Basic Input" (change)="onFileSelected($event)"></ngx-mat-file-input>
+          <mat-icon matSuffix>attach_file</mat-icon>
+        </mat-form-field>
+        <button class="w-25" mat-raised-button color="warn" (click)="onUpload()">SUBIR</button>
+      </div>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <form *ngIf="created" class="example-form" [formGroup]="storeProfile">
         <div class="name-container">
           <div class="row">
-
             <!-- NAME -->
             <div class="col-6">
               <mat-form-field class="cCard">
@@ -102,11 +95,9 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            </div>
+          </div>
 
         </div>
-
-
 
 
         <div formGroupName="address">
@@ -181,37 +172,16 @@
         </div>
 
 
-
-
-      <!-- CARD ACTIONS-->
-      <mat-card-actions align="center">
-        <button type="submit" [disabled]="storeProfile.invalid || !storeProfile.dirty" mat-raised-button color="primary"
-                (click)="updateStoreProfile(storeProfile.value)">Registrar
-        </button>
-      </mat-card-actions>
-    </form>
-
-
-  </mat-card-content>
-</mat-card>
-      <div class="col">
-      <mat-card *ngIf="created" class="mCard">
-        <mat-card-title>Cambiar imagen</mat-card-title>
-        <input type="file" id="imgFileTypeHTML" accept=".png, .jpg, .jpeg" (change)="onFileSelected($event)">
-        <button mat-raised-button color="primary" (click)="onUpload()">Subir foto</button>
-        <mat-progress-bar mode="determinate" [value]="uploadPercent"></mat-progress-bar>
-
-      <div *ngIf="this.store.image==null">
-        <mat-card-subtitle>No hay imagen de tienda</mat-card-subtitle>
-      </div>
-        <div *ngIf="this.store.image!=null">
-          <img src="{{this.store.image.url}}" alt="StoreImage">
-        </div>
-
-      </mat-card>
-      </div>
-    </div>
-  </div>
+        <!-- CARD ACTIONS-->
+        <mat-card-actions align="center">
+          <button type="submit" [disabled]="storeProfile.invalid || !storeProfile.dirty" mat-raised-button
+                  color="primary"
+                  (click)="updateStoreProfile(storeProfile.value)">GUARDAR
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>

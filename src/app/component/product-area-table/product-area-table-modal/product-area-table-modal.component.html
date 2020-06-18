@@ -1,9 +1,9 @@
-<form class="example-form" [formGroup]="storeArea">
+<form class="example-form" [formGroup]="productArea">
   <ng-container *ngIf="success == false">
     <mat-form-field class="example-full-width">
       <mat-label>Nombre</mat-label>
       <input matInput placeholder="Ej. Tecnologia" formControlName="name">
-      <mat-error *ngIf="storeArea.get('name').hasError('required')">
+      <mat-error *ngIf="productArea.get('name').hasError('required')">
         Nombre es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
@@ -11,11 +11,11 @@
     <mat-form-field class="example-full-width">
       <mat-label>Descripcion</mat-label>
       <textarea matInput placeholder="Ej. el futuro es hoy..." formControlName="description"></textarea>
-      <mat-error *ngIf="storeArea.get('description').hasError('required')">
+      <mat-error *ngIf="productArea.get('description').hasError('required')">
         Descripcion es <strong>requerida</strong>
       </mat-error>
     </mat-form-field>
-    <button [disabled]="storeArea.invalid" class="w-100 green" mat-stroked-button (click)="saveStoreArea()">
+    <button [disabled]="productArea.invalid" class="w-100 green" mat-stroked-button (click)="saveProductArea()">
       GUARDAR
     </button>
   </ng-container>

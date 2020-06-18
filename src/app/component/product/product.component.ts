@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../model/product";
 import {CartService} from "../../service/cart.service";
 import {ProductFormComponent} from "./product-form/product-form.component";
 import {MatDialog} from "@angular/material/dialog";
+import {TokenService} from '../../service/token.service';
+import {ProductService} from '../../service/product.service';
 
 @Component({
   selector: 'app-product',
@@ -12,10 +14,17 @@ import {MatDialog} from "@angular/material/dialog";
 export class ProductComponent implements OnInit {
 
   @Input() productCard: Product;
+  @Input() rol: string;
+  @Input() username: string;
+  @Input() usernameStorage;
+  @Output() productEvent = new EventEmitter<Product>();
+  @Output() productEventDelete = new EventEmitter<Product>();
   isOpen: boolean = false;
   constructor(private cartService: CartService,
-              private dialog: MatDialog) {
-
+              private dialog: MatDialog,
+              private tokenService: TokenService,
+              private productService: ProductService) {
+    this.usernameStorage = tokenService.getUsernameFromStorage()
   }
 
   ngOnInit(): void {  }
@@ -33,8 +42,17 @@ export class ProductComponent implements OnInit {
       });
       this.isOpen = true
       dialogRef.afterClosed().subscribe(result => {
+        this.productEvent.emit(result);
         this.isOpen = false;
       });
     }
+  }
+
+  delete(product: Product){
+    this.productService.deleteById(product.id).subscribe((data)=>{
+      this.productEventDelete.emit(product)
+    },(error)=>{
+
+    })
   }
 }

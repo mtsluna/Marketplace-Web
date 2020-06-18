@@ -8,6 +8,7 @@ import {ProductComponent} from "../product/product.component";
 import {MatDialog} from "@angular/material/dialog";
 import {CartComponent} from "../shared/cart/cart.component";
 import {ProductFormComponent} from "../product/product-form/product-form.component";
+import {TokenService} from '../../service/token.service';
 
 @Component({
   selector: 'app-store',
@@ -18,13 +19,17 @@ export class StoreComponent implements OnInit {
   store: Store;
   onCharge: boolean = true;
   isOpen: boolean = false;
+  rol: string = '';
+  username: string = '';
 
   constructor(private activatedRoute: ActivatedRoute,
               private storeService: StoreService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private tokenService: TokenService) {
 
     this.onCharge = true;
-
+    this.rol = tokenService.getRoleFromStorage();
+    this.username = tokenService.getUsernameFromStorage();
     this.activatedRoute.params.subscribe( params => {
       this.storeService.getById(params['id']).subscribe( data =>{
         this.store = data;
@@ -45,9 +50,29 @@ export class StoreComponent implements OnInit {
       });
       this.isOpen = true
       dialogRef.afterClosed().subscribe(result => {
-        this.store.products.push(result);
+        console.log(result)
+        if(result != undefined){
+            this.store.products.push(result);
+        }
         this.isOpen = false;
       });
+    }
+  }
+
+  replace(e: Product){
+    let array = this.store.products.filter((product)=> product.id == e.id);
+    if(array.length > 0){
+      console.log(this.store.products.indexOf(array[0]));
+      this.store.products.splice(this.store.products.indexOf(array[0]), 1);
+      this.store.products.push(e);
+    }
+  }
+
+  delete(e){
+    let array = this.store.products.filter((product)=> product.id == e.id);
+    if(array.length > 0){
+      console.log(this.store.products.indexOf(array[0]));
+      this.store.products.splice(this.store.products.indexOf(array[0]), 1);
     }
   }
 
