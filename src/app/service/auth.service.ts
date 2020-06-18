@@ -36,4 +36,8 @@ export class AuthService {
     }
   }
 
+  saveLaunchedLoginPath(launchedLoginFrom: string): void {
+    localStorage.setItem('launchedLoginFrom', launchedLoginFrom);
+  }
+
 }

@@ -1,41 +1,49 @@
 <div class="cart">
-  <table class="table-width" mat-table [dataSource]="products">
-    <div class="table-content">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let element"> {{element.product.name}} </td>
-        <td mat-footer-cell *matFooterCellDef> Total </td>
-      </ng-container>
+  <div>
+    <table class="table-width" mat-table [dataSource]="products">
+      <div class="table-content">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.product.name}} </td>
+          <td mat-footer-cell *matFooterCellDef> Total </td>
+        </ng-container>
 
-      <ng-container matColumnDef="quantity" class="center column-size">
-        <th mat-header-cell class="center" *matHeaderCellDef> Cantidad </th>
-        <td class="center" mat-cell *matCellDef="let element">
-          <button class="red" mat-icon-button (click)="removeOneProduct(element.product)">
-            <mat-icon class="size">remove</mat-icon>
-          </button>
-          {{element.quantity}}
-          <button class="green" mat-icon-button (click)="addOneProduct(element.product)">
-            <mat-icon class="size">add</mat-icon>
-          </button>
-        </td>
-        <td class="center" mat-footer-cell *matFooterCellDef>{{items}}</td>
-      </ng-container>
+        <ng-container matColumnDef="quantity" class="center column-size">
+          <th mat-header-cell class="center" *matHeaderCellDef> Cantidad </th>
+          <td class="center" mat-cell *matCellDef="let element">
+            <button class="red" mat-icon-button (click)="removeOneProduct(element.product)">
+              <mat-icon class="size">remove</mat-icon>
+            </button>
+            {{element.quantity}}
+            <button class="green" mat-icon-button (click)="addOneProduct(element.product)">
+              <mat-icon class="size">add</mat-icon>
+            </button>
+          </td>
+          <td class="center" mat-footer-cell *matFooterCellDef>{{items}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="price">
-        <th class="right" mat-header-cell *matHeaderCellDef> Precio U. </th>
-        <td class="right" mat-cell *matCellDef="let element"> {{element.product.price | currency}} </td>
-        <td class="right" mat-footer-cell *matFooterCellDef> {{total| currency}} </td>
-      </ng-container>
+        <ng-container matColumnDef="price">
+          <th class="right" mat-header-cell *matHeaderCellDef> Precio U. </th>
+          <td class="right" mat-cell *matCellDef="let element"> {{element.product.price | currency}} </td>
+          <td class="right" mat-footer-cell *matFooterCellDef> {{total| currency}} </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+      </div>
+    </table>
+    <div class="actions">
+      <button class="btn-size-25" mat-stroked-button color="warn" (click)="clearAllProducts()">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <span><button [disabled]="button == false || items < 1" class="btn-size-75 green-btn" mat-stroked-button (click)="solicitar()">Solicitar</button></span>
     </div>
-  </table>
-  <div class="actions">
-    <button class="btn-size-25" mat-stroked-button color="warn" (click)="clearAllProducts()">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <span><button class="btn-size-75 green-btn" mat-stroked-button>Solicitar</button></span>
+  </div>
+  <div *ngIf="error == 'no'" class="alert alert-success text-center" role="alert">
+    La compra fue realizada con exito! El carrito se cerrara y vaciara en 5 segundos!
+  </div>
+  <div *ngIf="error == 'yes'" class="alert alert-danger text-center" role="alert">
+    Hubo un problema al realizar la compra. Puede deberse a una recargar en el servidor. Te recomendamos que intentes nuevamente en unos instantes.
   </div>
 </div>

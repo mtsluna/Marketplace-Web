@@ -8,43 +8,49 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink="/lobby">Shops <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="this.tokenService.getRoleFromStorage() == 'ROLE_BUSINESS'">
         <a class="nav-link" (click)="getStoreNumber()">Mi tienda</a>
+      </li>
+      <li class="nav-item" *ngIf="this.tokenService.getRoleFromStorage() == 'ROLE_ADMIN'">
+        <a class="nav-link" routerLink="admin/store/areas">Store Areas</a>
+      </li>
+      <li class="nav-item" *ngIf="this.tokenService.getRoleFromStorage() == 'ROLE_ADMIN'">
+        <a class="nav-link" routerLink="admin/product/areas">Product Areas</a>
       </li>
     </ul>
   </div>
   <form class="form-inline">
-    <div *ngIf="this.authService.isLogged">
-      <a routerLink="/purchases">
-        Mis compras
-      </a>
+    <div *ngIf="this.tokenService.getRoleFromStorage() == 'ROLE_CLIENT' && (this.tokenService.getRefreshTokenFromStorage() != '' || this.tokenService.getTokenFromStorage() != '')">
+      <button routerLink="/purchases" style="outline:none;" mat-icon-button>
+        <mat-icon class="black">shopping_bag</mat-icon>
+      </button>
     </div>
-    <div>
-      <button *ngIf="this.authService.isLogged" style="outline:none;" mat-icon-button (click)="openDialog()">
+    <div *ngIf="this.tokenService.getRoleFromStorage() == 'ROLE_CLIENT' && (this.tokenService.getRefreshTokenFromStorage() != '' || this.tokenService.getTokenFromStorage() != '')">
+      <button style="outline:none;" mat-icon-button (click)="openDialog()">
         <mat-icon matBadge="{{items}}" matBadgeColor="warn" class="black">shopping_cart</mat-icon>
       </button>
     </div>
     <div class="nav-icon"></div>
-    <div *ngIf="this.authService.isLogged">
+    <div *ngIf="this.tokenService.getRefreshTokenFromStorage() != '' || this.tokenService.getTokenFromStorage() != ''">
       <a routerLink="/profile">
         <mat-icon class="black">person</mat-icon>
       </a>
     </div>
     <div class="nav-icon"></div>
-    <div *ngIf="this.authService.isLogged">
+    <div *ngIf="this.tokenService.getRefreshTokenFromStorage() != '' || this.tokenService.getTokenFromStorage() != ''">
       <a routerLink="/login" (click)="logout()">
         <mat-icon class="black">logout</mat-icon>
       </a>
     </div>
-    <div *ngIf="!this.authService.isLogged" class="pal">
-      <a routerLink="/login">
-        Iniciar sesion
-      </a>
+    <div *ngIf="this.tokenService.getRefreshTokenFromStorage() == '' || this.tokenService.getTokenFromStorage() == ''" class="pal">
+      <button routerLink="/login" style="outline:none;" mat-icon-button>
+        <mat-icon class="black">login</mat-icon>
+      </button>
     </div>
-    <div *ngIf="!this.authService.isLogged" class="pal">
-    <a routerLink="/register">
-        Registrar
-    </a>
+    <div *ngIf="this.tokenService.getRefreshTokenFromStorage() == '' || this.tokenService.getTokenFromStorage() == ''" class="pal">
+      <button routerLink="/register" style="outline:none;" mat-icon-button>
+        <mat-icon class="black">how_to_reg</mat-icon>
+      </button>
   </div>
   </form>
 </nav>

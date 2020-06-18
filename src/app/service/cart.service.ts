@@ -60,8 +60,8 @@ export class CartService {
   }
 
   clearProduct(){
-    this.products = []
-    localStorage.setItem('products', JSON.stringify(this.products))
+    this.products = [];
+    localStorage.setItem('products', JSON.stringify(this.products));
     this.subject.next(this.products)
   }
 

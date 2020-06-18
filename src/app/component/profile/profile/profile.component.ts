@@ -11,8 +11,10 @@ export class ProfileComponent implements OnInit {
   constructor(private tokenService: TokenService) {
     if(this.tokenService.getRoleFromStorage() == 'ROLE_CLIENT'){
       this.type = 'client';
-    }else{
-      this.type = 'store';
+    } else {
+      if(this.tokenService.getRoleFromStorage() == 'ROLE_BUSINESS'){
+        this.type = 'store';
+      }
     }
   }
 

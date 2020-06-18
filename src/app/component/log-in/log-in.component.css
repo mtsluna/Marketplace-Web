@@ -7,3 +7,13 @@ mat-card {
 mat-form-field {
   display: block;
 }
+
+mat-error {
+  margin: 1em auto;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
