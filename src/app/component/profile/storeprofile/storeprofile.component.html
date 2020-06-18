@@ -5,12 +5,14 @@
   <mat-card class="mCard">
     <mat-card-content>
       <div class="">
-        <img class="img-size" mat-card-image
-             src="{{(this.store.image != null && this.store.image.url != null) ? this.store.image.url : 'https://www.salud.mapfre.es/wp-content/uploads/2018/05/default-img-1.gif'}}">
-        <mat-progress-bar mode="determinate" [value]="uploadPercent"></mat-progress-bar>
+        <div>
+          <img class="img" mat-card-image
+               src="{{(this.store.image != null && this.store.image.url != null) ? this.store.image.url : 'https://www.salud.mapfre.es/wp-content/uploads/2018/05/default-img-1.gif'}}">
+          <mat-progress-bar mode="determinate" [value]="uploadPercent"></mat-progress-bar>
+        </div>
         <mat-form-field class="w-75">
           <ngx-mat-file-input accept=".png, .jpg, .jpeg" class="w-75" formControlName="basicfile"
-                              placeholder="Basic Input" (change)="onFileSelected($event)"></ngx-mat-file-input>
+                              placeholder="Imagen" (change)="onFileSelected($event)"></ngx-mat-file-input>
           <mat-icon matSuffix>attach_file</mat-icon>
         </mat-form-field>
         <button class="w-25" mat-raised-button color="warn" (click)="onUpload()">SUBIR</button>

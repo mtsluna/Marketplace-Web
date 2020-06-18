@@ -1,184 +1,163 @@
-<div class="profile">
-<div class="row">
-  <div class="col-3">
-    <mat-toolbar color="warn">
-      <mat-toolbar-row>
-        <span>Perfil</span>
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Perfil">face</mat-icon>
-      </mat-toolbar-row>
-
-      <mat-toolbar-row>
-        <span>Compras</span>
-        <span class="example-spacer"></span>
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Compras">shopping_cart</mat-icon>
-      </mat-toolbar-row>
-
-
-    </mat-toolbar>
-  </div>
-  <div class="profile col-9" style="align-content: center">
-    <mat-card class="mCard">
-      <mat-card-content>
-        <div *ngIf="onCharge == true" class="spinner">
-          <mat-spinner></mat-spinner>
-        </div>
-        <form *ngIf="created" class="example-form" [formGroup]="clientProfile">
-
-
-            <div class="name-container">
-              <div class="row">
-                <div class="col-6">
-                  <!-- NAME -->
-                  <mat-form-field class="cCard">
-                    <input matInput placeholder="Nombre" formControlName="name"
-                           [errorStateMatcher]="matcher">
-                    <mat-hint>Ingrese nombre</mat-hint>
-                    <mat-error *ngIf="clientProfile.get('name').hasError('required')">
-                      Nombre es <strong>requerido</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-6">
-                  <!-- SURNAME -->
-                  <mat-form-field class="cCard">
-                    <input matInput placeholder="Apellido" formControlName="surname"
-                           [errorStateMatcher]="matcher">
-                    <mat-hint>Ingrese apellido</mat-hint>
-                    <mat-error *ngIf="clientProfile.get('surname').hasError('required')">
-                      Apellido es <strong>requerido</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-
-            <div style="align-items: center">
-              <!-- DNI -->
+<div *ngIf="onCharge == true" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+<div [hidden]="onCharge == true" class="profile">
+  <mat-card class="mCard">
+    <mat-card-content>
+      <img class="img" mat-card-image
+           src="https://ak.picdn.net/shutterstock/videos/4972433/thumb/1.jpg">
+      <mat-progress-bar></mat-progress-bar>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <form class="example-form" [formGroup]="clientProfile">
+        <div class="name-container">
+          <div class="row">
+            <div class="col-6">
+              <!-- NAME -->
               <mat-form-field class="cCard">
-                <input matInput placeholder="DNI" formControlName="dni"
+                <input matInput placeholder="Nombre" formControlName="name"
                        [errorStateMatcher]="matcher">
-                <mat-hint>Ingrese DNI</mat-hint>
-                <mat-error *ngIf="clientProfile.get('dni').hasError('required')">
-                  DNI es <strong>requerido</strong>
-                </mat-error>
-                <mat-error *ngIf="clientProfile.get('dni').hasError('maxlength')">
-                  Debe tener menos de <strong>10 caracteres</strong>
-                </mat-error>
-                <mat-error *ngIf="clientProfile.get('dni').hasError('pattern')">
-                  DNI deben ser solo<strong>numeros</strong>
+                <mat-hint>Ingrese nombre</mat-hint>
+                <mat-error *ngIf="clientProfile.get('name').hasError('required')">
+                  Nombre es <strong>requerido</strong>
                 </mat-error>
               </mat-form-field>
             </div>
-
-
-            <div class="row">
-              <div formGroupName="user">
-              <div class="col-6">
-                <!-- USERNAME -->
-                <mat-form-field class="cCard">
-                  <input matInput placeholder="Nombre de usuario" formControlName="username"
-                         [errorStateMatcher]="matcher">
-                  <mat-hint>Ingrese nombre de usuario</mat-hint>
-                  <mat-error *ngIf="clientProfile.get('user').get('username').hasError('required')">
-                    Nombre de usuario es <strong>requerido</strong>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              </div>
-            </div>
-
-
-
-            <div formGroupName="address">
-              <div class="row">
-                <div class="col-6">
-                  <!-- STREET NAME -->
-                  <mat-form-field class="cCard">
-                    <input matInput placeholder="Calle" formControlName="street"
-                           [errorStateMatcher]="matcher">
-                    <mat-hint>Ingrese calle</mat-hint>
-                    <mat-error *ngIf="clientProfile.get('address').get('street').hasError('required')">
-                      Calle es <strong>requerido</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-6">
-                  <!-- STREET NUMBER -->
-                  <mat-form-field class="cCard">
-                    <input type="number" matInput placeholder="Calle N°" formControlName="number"
-                           [errorStateMatcher]="matcher">
-                    <mat-hint>Calle N°</mat-hint>
-                    <mat-error *ngIf="clientProfile.get('address').get('number').hasError('required')">
-                      N° es <strong>requerido</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-              <!-- POSTAL CODE -->
+            <div class="col-6">
+              <!-- SURNAME -->
               <mat-form-field class="cCard">
-                <input matInput placeholder="Codigo Postal" formControlName="postalCode"
+                <input matInput placeholder="Apellido" formControlName="surname"
                        [errorStateMatcher]="matcher">
-                <mat-hint>Ingrese CP</mat-hint>
-                <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('required')">
-                  CP es <strong>requerido</strong>
+                <mat-hint>Ingrese apellido</mat-hint>
+                <mat-error *ngIf="clientProfile.get('surname').hasError('required')">
+                  Apellido es <strong>requerido</strong>
                 </mat-error>
-                <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('maxLength')">
-                  Máximo <strong>5 digitos</strong>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div style="align-items: center">
+          <!-- DNI -->
+          <mat-form-field class="cCard">
+            <input matInput placeholder="DNI" formControlName="dni"
+                   [errorStateMatcher]="matcher">
+            <mat-hint>Ingrese DNI</mat-hint>
+            <mat-error *ngIf="clientProfile.get('dni').hasError('required')">
+              DNI es <strong>requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="clientProfile.get('dni').hasError('maxlength')">
+              Debe tener menos de <strong>10 caracteres</strong>
+            </mat-error>
+            <mat-error *ngIf="clientProfile.get('dni').hasError('pattern')">
+              DNI deben ser solo<strong>numeros</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div formGroupName="user">
+            <!-- USERNAME -->
+            <mat-form-field class="cCard w-100">
+              <input class="w-100" matInput placeholder="Nombre de usuario" formControlName="username"
+                     [errorStateMatcher]="matcher">
+              <mat-hint>Ingrese nombre de usuario</mat-hint>
+              <mat-error *ngIf="clientProfile.get('user').get('username').hasError('required')">
+                Nombre de usuario es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <div formGroupName="address">
+          <div class="row">
+            <div class="col-6">
+              <!-- STREET NAME -->
+              <mat-form-field class="cCard">
+                <input matInput placeholder="Calle" formControlName="street"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Ingrese calle</mat-hint>
+                <mat-error *ngIf="clientProfile.get('address').get('street').hasError('required')">
+                  Calle es <strong>requerido</strong>
                 </mat-error>
-                <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('pattern')">
-                  Deben contener solo <strong>numeros</strong>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <!-- STREET NUMBER -->
+              <mat-form-field class="cCard">
+                <input type="number" matInput placeholder="Calle N°" formControlName="number"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Calle N°</mat-hint>
+                <mat-error *ngIf="clientProfile.get('address').get('number').hasError('required')">
+                  N° es <strong>requerido</strong>
                 </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- POSTAL CODE -->
+          <mat-form-field class="cCard">
+            <input matInput placeholder="Codigo Postal" formControlName="postalCode"
+                   [errorStateMatcher]="matcher">
+            <mat-hint>Ingrese CP</mat-hint>
+            <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('required')">
+              CP es <strong>requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('maxLength')">
+              Máximo <strong>5 digitos</strong>
+            </mat-error>
+            <mat-error *ngIf="clientProfile.get('address').get('postalCode').hasError('pattern')">
+              Deben contener solo <strong>numeros</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+
+          <div class="row">
+            <div class="col-6">
+              <!-- STATE -->
+              <mat-form-field class="cCard">
+                <mat-label>Provincia</mat-label>
+                <mat-select (selectionChange)="this.stateId=$event.value" [value]="stateId">
+                  <mat-option *ngFor="let state of states" [value]="state.id">
+                    <div *ngIf="state.country.id == countryid">{{state.name}}</div>
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
               <br>
-
-              <div class="row">
-                <div class="col-6">
-                  <!-- STATE -->
-                  <mat-form-field class="cCard">
-                    <mat-label>Provincia</mat-label>
-                    <mat-select (selectionChange)="this.stateId=$event.value" [value]="stateId">
-                      <mat-option *ngFor="let state of states" [value]="state.id">
-                        <div *ngIf="state.country.id == countryid">{{state.name}}</div>
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <br>
-                </div>
-                <div class="col-6">
-                  <!-- CITY -->
-                  <div formGroupName="city">
-                    <mat-form-field class="cCard">
-                      <mat-label>Ciudad</mat-label>
-                      <mat-select formControlName="id" [errorStateMatcher]="matcher">
-                        <div *ngFor="let city of cities">
-                          <mat-option [value]="city.id" *ngIf="stateId==city.state.id">
-                            {{city.name}}
-                          </mat-option>
-                        </div>
-                      </mat-select>
-                      <mat-error *ngIf="clientProfile.get('address').get('city').get('id').hasError('required')">
-                        Ciudad es <strong>requerido</strong>
-                      </mat-error>
-                    </mat-form-field>
-                  </div><!--FORM GROUP CITY-->
-                </div><!-- FORM GROUP ADDRESS-->
-              </div>
             </div>
+            <div class="col-6">
+              <!-- CITY -->
+              <div formGroupName="city">
+                <mat-form-field class="cCard">
+                  <mat-label>Ciudad</mat-label>
+                  <mat-select formControlName="id" [errorStateMatcher]="matcher">
+                    <div *ngFor="let city of cities">
+                      <mat-option [value]="city.id" *ngIf="stateId==city.state.id">
+                        {{city.name}}
+                      </mat-option>
+                    </div>
+                  </mat-select>
+                  <mat-error *ngIf="clientProfile.get('address').get('city').get('id').hasError('required')">
+                    Ciudad es <strong>requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div><!--FORM GROUP CITY-->
+            </div><!-- FORM GROUP ADDRESS-->
+          </div>
+        </div>
 
 
-            <!-- CARD ACTIONS-->
-            <mat-card-actions align="center">
-              <button pButton type="submit" [disabled]="clientProfile.invalid || !clientProfile.dirty" mat-raised-button color="primary"
-                      (click)="updateClientProfile(clientProfile.value)">GUARDAR
-              </button>
-            </mat-card-actions>
+        <!-- CARD ACTIONS-->
+        <mat-card-actions align="center">
+          <button mat-button type="submit" [disabled]="clientProfile.invalid || !clientProfile.dirty" mat-raised-button
+                  color="primary"
+                  (click)="updateClientProfile(clientProfile.value)">GUARDAR
+          </button>
+        </mat-card-actions>
 
-        </form>
-      </mat-card-content>
-
-    </mat-card>
-  </div>
-</div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TokenService} from '../../../service/token.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   type: String = 'store';
-  constructor() {
-    if(localStorage.getItem('role') == 'ROLE_CLIENT'){
+  constructor(private tokenService: TokenService) {
+    if(this.tokenService.getRoleFromStorage() == 'ROLE_CLIENT'){
       this.type = 'client';
     }else{
       this.type = 'store';

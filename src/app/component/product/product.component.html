@@ -6,7 +6,7 @@
     <mat-divider></mat-divider>
     <mat-card-actions>
       <div class="product-btn">
-        <button *ngIf="rol == 'ROLE_USER' || rol == 'ROLE_BUSINESS' && username != usernameStorage" class="product-btn" mat-stroked-button (click)="addProduct(productCard)">· {{productCard.price | currency}} · Añadir</button>
+        <button *ngIf="rol == 'ROLE_CLIENT' || rol == 'ROLE_BUSINESS' && username != usernameStorage" class="product-btn" mat-stroked-button (click)="addProduct(productCard)">· {{productCard.price | currency}} · Añadir</button>
         <button *ngIf="rol == 'ROLE_BUSINESS' && username == usernameStorage" (click)="openDialog(productCard)" class="w-50 button-action" mat-stroked-button aria-label="Editar">
           <mat-icon>edit_text</mat-icon>
         </button>

@@ -5,6 +5,9 @@ import {Product} from '../../../model/product';
 import {CartService} from '../../../service/cart.service';
 import {TokenService} from "../../../service/token.service";
 import {AuthService} from "../../../service/auth.service";
+import {StoreService} from '../../../service/store.service';
+import {Router} from '@angular/router';
+import {Store} from '../../../model/store';
 
 @Component({
   selector: 'app-nav',
@@ -20,7 +23,9 @@ export class NavComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private cartService: CartService,
               private tokenService: TokenService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private storeService: StoreService,
+              private router: Router) {
     if (this.authService.isAuth()) {
       this.isLogged = true;
       console.log(this.isLogged);
@@ -57,5 +62,11 @@ export class NavComponent implements OnInit {
     this.tokenService.saveTokenInStorage('');
     this.authService.isLogged = false;
     console.log(localStorage.getItem('refreshToken'))
+  }
+
+  getStoreNumber(){
+    this.storeService.getByUsername(this.tokenService.getUsernameFromStorage()).subscribe((data: Store)=>{
+      this.router.navigate(['/store/'+data[0].id]);
+    })
   }
 }

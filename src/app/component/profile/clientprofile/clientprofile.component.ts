@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MyErrorStateMatcher} from "../../register/register.component";
-import {ClientService} from "../../../service/client.service";
-import {City} from "../../../model/city";
-import {State} from "../../../model/state";
-import {MatDialog} from "@angular/material/dialog";
-import {ConfirmationService} from "primeng";
-import {Client} from "../../../model/client";
-import {Address} from "../../../model/address";
-import {Purchase} from "../../../model/purchase";
-import {User} from "../../../model/user";
-import {CityService} from "../../../service/city.service";
-import {StateService} from "../../../service/state.service";
-import {Router} from "@angular/router";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MyErrorStateMatcher} from '../../register/register.component';
+import {ClientService} from '../../../service/client.service';
+import {City} from '../../../model/city';
+import {State} from '../../../model/state';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmationService} from 'primeng';
+import {Client} from '../../../model/client';
+import {Address} from '../../../model/address';
+import {Purchase} from '../../../model/purchase';
+import {User} from '../../../model/user';
+import {CityService} from '../../../service/city.service';
+import {StateService} from '../../../service/state.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -32,6 +32,7 @@ export class ClientprofileComponent implements OnInit {
   countryid = 1;
   created = false;
   onCharge: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
               private clientService: ClientService,
               private confirmationService: ConfirmationService,
@@ -40,48 +41,49 @@ export class ClientprofileComponent implements OnInit {
               private router: Router) {
     this.client = new Client();
     this.getCitiesandStates();
-    this.getUserandBuildForm(localStorage.getItem('username'));
+    this.buildForm();
   }
 
   ngOnInit(): void {
+    this.getUserandBuildForm(localStorage.getItem('username'));
   }
 
   // ARMO EL FORMULARIO
   buildForm() {
     this.clientProfile = this.formBuilder.group({
 // Inicio USUARIO
-      name: new FormControl(this.client.name, [
+      name: new FormControl('', [
         Validators.required,
       ]),
-      surname: new FormControl(this.client.surname, [
+      surname: new FormControl('', [
         Validators.required,
       ]),
-      dni: new FormControl(this.client.dni, [
+      dni: new FormControl('', [
         Validators.required,
         Validators.maxLength(10),
-        Validators.pattern("^[0-9]+$")
+        Validators.pattern('^[0-9]+$')
       ]),
       user: this.formBuilder.group({
-        username: new FormControl({value: this.client.user.username, disabled: true},[
+        username: new FormControl({value: '', disabled: true}, [
           Validators.required
 
         ])
       }),
       address: this.formBuilder.group({
 
-        street: new FormControl(this.client.address.street, [
+        street: new FormControl('', [
           Validators.required
         ]),
-        number: new FormControl(this.client.address.number, [
+        number: new FormControl('', [
           Validators.required,
           Validators.maxLength(5)
         ]),
-        postalCode: new FormControl(this.client.address.postalCode, [
+        postalCode: new FormControl('', [
           Validators.required,
           Validators.maxLength(5)
         ]),
         city: this.formBuilder.group({
-          id: new FormControl(this.client.address.city.id, [
+          id: new FormControl('', [
             Validators.required
           ])
         }),
@@ -115,25 +117,25 @@ export class ClientprofileComponent implements OnInit {
   getUserandBuildForm(username: string) {
     this.onCharge = true;
     this.clientService.getByUsername(username).subscribe(async (data: Client) => {
-      if(data[0]==null){
+      if (data[0] == null) {
         console.log('User not found');
-      }else{
-      this.client = await data[0];
-      this.stateId = this.client.address.city.state.id;
-      this.buildForm();
-      this.created = true;
-      this.onCharge = false;
-      console.log(this.stateId);
+      } else {
+        this.client = await data[0];
+        this.stateId = this.client.address.city.state.id;
+        this.created = true;
+        this.onCharge = false;
+        this.clientProfile.patchValue(this.client);
       }
     }, error => {
       console.log('An error has ocurred: ' + error.message);
     });
   }
-  getCitiesandStates(){
-    this.stateService.getAll().subscribe( data =>{
+
+  getCitiesandStates() {
+    this.stateService.getAll().subscribe(data => {
       this.states = data;
     });
-    this.cityService.getAll().subscribe( data => {
+    this.cityService.getAll().subscribe(data => {
       this.cities = data;
     });
   }

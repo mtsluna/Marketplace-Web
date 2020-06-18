@@ -8,7 +8,7 @@ mat-card-title {
 
 .mCard{
   margin: 0 auto;
-  max-width: 500px;
+  width: 700px;
 }
 
 .cCard{
@@ -21,9 +21,6 @@ mat-card-title {
 
 .register{
   height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 mat-toolbar{
   max-width: 50%;
@@ -36,10 +33,52 @@ mat-toolbar-row{
   height: fit-content;
   width: auto;
 }
+
 .profile {
   margin: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-mat-spinner{
-  size: 15px;
-  align-self: center;
+
+.spinner{
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.img{
+  margin: 0px;
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.file{
+
 }
