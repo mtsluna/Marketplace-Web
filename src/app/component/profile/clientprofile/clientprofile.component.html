@@ -1,8 +1,6 @@
-<div *ngIf="onCharge == true" class="spinner">
-  <mat-spinner></mat-spinner>
-</div>
-<div [hidden]="onCharge == true" class="profile">
-  <mat-card class="mCard">
+<div class="profile">
+  <mat-spinner *ngIf="onCharge == true" class="spinner"></mat-spinner>
+  <mat-card [hidden]="onCharge == true" class="mCard">
     <mat-card-content>
       <img class="img" mat-card-image
            src="https://ak.picdn.net/shutterstock/videos/4972433/thumb/1.jpg">

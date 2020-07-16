@@ -7,8 +7,10 @@ mat-card-title {
 }
 
 .mCard{
-  margin: 0 auto;
-  width: 700px;
+  border-radius: 0;
+  margin-right: 20px;
+  margin-left: 20px;
+  max-width: 800px;
 }
 
 .cCard{
@@ -22,6 +24,7 @@ mat-card-title {
 .register{
   height: 600px;
 }
+
 mat-toolbar{
   max-width: 50%;
   alignment: left;
@@ -35,17 +38,14 @@ mat-toolbar-row{
 }
 
 .profile {
-  margin: 1vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .spinner{
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
 }
 
 .upload-btn-wrapper {

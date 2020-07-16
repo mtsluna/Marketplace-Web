@@ -1,8 +1,6 @@
-<div class="footer-space">
-    <div *ngIf="type=='store'">
-      <app-storeprofile></app-storeprofile>
-    </div>
-    <div *ngIf="type=='client'">
-      <app-clientprofile></app-clientprofile>
-    </div>
+<div class="footer-space" *ngIf="type=='store'">
+    <app-storeprofile></app-storeprofile>
+</div>
+  <div class="footer-space" *ngIf="type=='client'">
+    <app-clientprofile></app-clientprofile>
 </div>
