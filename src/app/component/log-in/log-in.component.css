@@ -13,7 +13,30 @@ mat-error {
 }
 
 .login {
+  width: 350px;
+}
+
+.login-space{
+  height: 20px;
+}
+
+.login-button{
+  width: 100%;
+}
+
+.login-full{
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  background-image: url("https://marketing4ecommerce.net/wp-content/uploads/2016/03/buyer-persona-1.jpg");
+  background-size: cover;
+  margin: 0px !important;
+  padding: 0px !important;
+  scroll: no;
+  overflow-y: hidden;
+}
+
+.error-margin{
+  margin: 0px;
 }
