@@ -12,6 +12,8 @@ import {StoreService} from "../../service/store.service";
 import {StoreAreaService} from '../../service/store-area.service';
 import {StoreArea} from "../../model/storeArea";
 import {Router} from "@angular/router";
+import {sanitizeIdentifier} from '@angular/compiler';
+import {DomSanitizer} from '@angular/platform-browser';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -37,6 +39,8 @@ export class RegisterComponent implements OnInit {
   public states: State[];
   public countryid = 1;
   public stateId: number;
+  peopleImg;
+  storeImg;
   public storeAreas: StoreArea[];
   constructor(private formBuilder: FormBuilder,
               private clientService: ClientService,
@@ -44,8 +48,10 @@ export class RegisterComponent implements OnInit {
               private stateService: StateService,
               private storeService: StoreService,
               private storeAreaService: StoreAreaService,
-              private router: Router) {
-
+              private router: Router,
+              private sanitizer:DomSanitizer) {
+    this.peopleImg = sanitizer.bypassSecurityTrustStyle("url(../assets/people.jpg)");
+    this.storeImg = sanitizer.bypassSecurityTrustStyle("url(../assets/stores.jpg)");
     this.buildClientForm();
     this.buildStoreForm();
     this.getStates();
@@ -117,7 +123,6 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(25),
       ]),
       user: this.formBuilder.group({
-
         username: new FormControl('', [
           Validators.required
         ]),
@@ -180,7 +185,7 @@ export class RegisterComponent implements OnInit {
     if(this.formtype == 'client'){
       this.formtype = 'store';
       this.registerUser.reset();
-    }else{
+    } else {
       this.formtype = 'client';
       this.registerStore.reset();
     }

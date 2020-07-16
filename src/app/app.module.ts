@@ -51,6 +51,7 @@ import { PurchasesComponent } from './component/purchases/purchases.component';
 import {StoreprofileComponent} from './component/profile/storeprofile/storeprofile.component';
 import {MaterialFileInputModule} from 'ngx-material-file-input';
 import { PurchaseDetailsComponent } from './component/purchases/purchase-details/purchase-details.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -76,35 +77,36 @@ import { PurchaseDetailsComponent } from './component/purchases/purchase-details
     StoreprofileComponent,
     PurchaseDetailsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatListModule,
-    FlexModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    MatBadgeModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatStepperModule,
-    MatTableModule,
-    MatDialogModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatProgressBarModule,
-    ConfirmDialogModule,
-    MaterialFileInputModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatListModule,
+        FlexModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        MatBadgeModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatStepperModule,
+        MatTableModule,
+        MatDialogModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatProgressBarModule,
+        ConfirmDialogModule,
+        MaterialFileInputModule,
+        MatButtonToggleModule
+    ],
   providers: [
     AuthService,
     CanActivateLoginGuard,

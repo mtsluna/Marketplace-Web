@@ -1,15 +1,13 @@
-<div class="register" style="align-content: center">
+<div class="register" [style.background-image]="(formtype == 'client') ? peopleImg : storeImg">
   <mat-card class="mCard">
-    <mat-slide-toggle (toggleChange)="changeFormType()">
-      <div *ngIf="formtype=='client'">Tienda</div>
-      <div *ngIf="formtype=='store'">Cliente</div>
-    </mat-slide-toggle>
+    <mat-card-title>Registro de <span *ngIf="formtype=='client'">Clientes</span><span
+      *ngIf="formtype=='store'">Tiendas</span></mat-card-title>
     <!-- BEGIN STEPPER -->
-    <mat-horizontal-stepper linear #stepper *ngIf="formtype=='client'">
+    <mat-horizontal-stepper class="stepeer" linear #stepper *ngIf="formtype=='client'">
       <mat-card-content>
         <form class="example-form" [formGroup]="registerUser">
           <mat-step class="red" [editable]="true">
-            <ng-template matStepLabel>Tus datos</ng-template>
+            <ng-template matStepLabel>Datos</ng-template>
             <div class="name-container">
               <div class="row">
                 <div class="col-6">
@@ -55,8 +53,7 @@
               </mat-form-field>
             </div>
 
-            <div class="row">
-              <div formGroupName="user">
+            <div class="row" formGroupName="user">
               <div class="col-6">
                 <!-- USERNAME -->
                 <mat-form-field class="cCard">
@@ -87,11 +84,10 @@
                   </button>
                 </mat-form-field>
               </div>
-              </div>
             </div>
           </mat-step>
           <mat-step [editable]="true">
-            <ng-template matStepLabel>Tu dirección</ng-template>
+            <ng-template matStepLabel>Dirección</ng-template>
             <div formGroupName="address">
               <div class="row">
                 <div class="col-6">
@@ -181,13 +177,13 @@
       </mat-card-content>
     </mat-horizontal-stepper>
 
-      <!------------------------- STORE FORMULARY --------------------------->
-      <mat-horizontal-stepper linear #stepper *ngIf="formtype=='store'">
+    <!------------------------- STORE FORMULARY --------------------------->
+    <mat-horizontal-stepper linear #stepper *ngIf="formtype=='store'">
       <mat-card-content>
 
         <form class="example-form" [formGroup]="registerStore">
           <mat-step [editable]="true">
-            <ng-template matStepLabel>Datos tienda</ng-template>
+            <ng-template matStepLabel>Datos</ng-template>
             <div class="name-container">
               <div class="row">
 
@@ -251,43 +247,41 @@
               </mat-form-field>
             </div><!--FORM GROUP STORE AREA-->
 
-
-            <div class="row">
+            <div class="row" formGroupName="user">
               <div class="col-6">
-                <div formGroupName="user">
-                  <!-- USERNAME -->
-                  <mat-form-field class="cCard">
-                    <input matInput placeholder="Nombre de usuario" formControlName="username"
-                           [errorStateMatcher]="matcher">
-                    <mat-hint>Ingrese nombre de usuario</mat-hint>
-                    <mat-error *ngIf="registerStore.get('user').get('username').hasError('required')">
-                      Nombre de usuario es <strong>requerido</strong>
-                    </mat-error>
-                  </mat-form-field>
-
-                  <!-- PASSWORD -->
-                  <mat-form-field class="cCard">
-                    <input matInput placeholder="Contraseña" formControlName="password"
-                           [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
-                    <mat-hint>Ingrese contraseña</mat-hint>
-                    <mat-error *ngIf="registerStore.get('user').get('password').hasError('required')">
-                      Contraseña es <strong>requerida</strong>
-                    </mat-error>
-                    <mat-error *ngIf="registerStore.get('user').get('password').hasError('minlength')">
-                      Debe tener mas de <strong>6 caracteres</strong>
-                    </mat-error>
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                            [attr.aria-pressed]="hide">
-                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                  </mat-form-field>
-                </div>
+                <!-- USERNAME -->
+                <mat-form-field class="cCard">
+                  <input matInput placeholder="Nombre de usuario" formControlName="username"
+                         [errorStateMatcher]="matcher">
+                  <mat-hint>Ingrese nombre de usuario</mat-hint>
+                  <mat-error *ngIf="registerStore.get('user').get('username').hasError('required')">
+                    Nombre de usuario es <strong>requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <!-- PASSWORD -->
+                <mat-form-field class="cCard">
+                  <input matInput placeholder="Contraseña" formControlName="password"
+                         [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+                  <mat-hint>Ingrese contraseña</mat-hint>
+                  <mat-error *ngIf="registerStore.get('user').get('password').hasError('required')">
+                    Contraseña es <strong>requerida</strong>
+                  </mat-error>
+                  <mat-error *ngIf="registerStore.get('user').get('password').hasError('minlength')">
+                    Debe tener mas de <strong>6 caracteres</strong>
+                  </mat-error>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
               </div>
             </div>
           </mat-step>
 
           <mat-step [editable]="true">
-            <ng-template matStepLabel>Dirección tienda</ng-template>
+            <ng-template matStepLabel>Dirección</ng-template>
 
             <div formGroupName="address">
               <div class="row">
@@ -376,6 +370,14 @@
 
       </mat-card-content>
     </mat-horizontal-stepper>
+    <div class="center">
+      <span>Registrate como {{(formtype != 'client') ? 'cliente' : 'tienda'}} cambiando aqui: </span>
+      <mat-slide-toggle color="warn" (toggleChange)="changeFormType()">
+      </mat-slide-toggle>
+      <div>
+        <a class="text-center" routerLink="/login">Tienes una cuenta? Ingresa aqui</a>
+      </div>
+    </div>
   </mat-card>
 </div>
 
