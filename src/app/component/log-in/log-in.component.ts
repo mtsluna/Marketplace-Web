@@ -43,12 +43,19 @@ export class LogInComponent implements OnInit {
           this.authenticationService.isLogged = true;
           this.router.navigateByUrl('lobby');
 
-          //Si el usuario triggereo el login desde el profile
-          if (localStorage.getItem('launchedLoginFrom') == 'profile') {
-            this.router.navigateByUrl('profile');
-          } else {
-            //Fallback. Podriamos manegar otros casos
+          // console.log(this.tokenService.getRoleFromStorage());
+          if(this.tokenService.getRoleFromStorage() == 'ROLE_ADMIN'){
+            console.log('asdadaksdjaskjd')
             this.router.navigateByUrl('lobby');
+          }
+          else{
+            //Si el usuario triggereo el login desde el profile
+            if (localStorage.getItem('launchedLoginFrom') == 'profile') {
+              this.router.navigateByUrl('profile');
+            } else {
+              //Fallback. Podriamos manegar otros casos
+              this.router.navigateByUrl('lobby');
+            }
           }
         },
         (error => {

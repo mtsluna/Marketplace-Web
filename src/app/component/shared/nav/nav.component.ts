@@ -20,6 +20,7 @@ export class NavComponent implements OnInit {
     isOpen: boolean = false;
     items: number = 0;
     isLogged: boolean = false;
+    public isCollapsed = true;
 
     constructor(public dialog: MatDialog,
                 private cartService: CartService,
