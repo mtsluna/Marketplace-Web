@@ -7,6 +7,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {ProductFormComponent} from "../product/product-form/product-form.component";
 import {MatDialog} from "@angular/material/dialog";
 import {PurchaseDetailsComponent} from "./purchase-details/purchase-details.component";
+import {PurchaseDetail} from '../../model/purchaseDetail';
 
 @Component({
   selector: 'app-purchases',
@@ -43,6 +44,13 @@ export class PurchasesComponent implements OnInit, AfterViewInit {
     }, error => {
       console.log('An error has ocurred: ' + error.message);
     });
+  }
+
+  getTotal(purchaseDetail: PurchaseDetail[]) {
+    console.log(purchaseDetail);
+    return purchaseDetail.map(data=>{
+      return data.quantity * data.product.price
+    }).reduce((acum, val) => acum + val);
   }
 
   openDetails(product: any) {

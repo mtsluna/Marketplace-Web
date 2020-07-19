@@ -1,9 +1,15 @@
 .container-spinner{
-  height: 500px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-table {
+.table {
+  position: relative;
+  overflow: auto;
+  max-height: 500px;
+}
+
+table{
   width: 100%;
 }

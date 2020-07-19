@@ -21,8 +21,8 @@
   </div>
   <form class="form-inline">
     <div *ngIf="this.tokenService.getRoleFromStorage() == 'ROLE_CLIENT' && (this.tokenService.getRefreshTokenFromStorage() != '' || this.tokenService.getTokenFromStorage() != '')">
-      <button routerLink="/purchases" style="outline:none;" mat-icon-button>
-        <mat-icon class="black">shopping_bag</mat-icon>
+      <button routerLink="/purchases" style="outline:none;" mat-button>
+        Compras
       </button>
     </div>
     <div *ngIf="this.tokenService.getRoleFromStorage() == 'ROLE_CLIENT' && (this.tokenService.getRefreshTokenFromStorage() != '' || this.tokenService.getTokenFromStorage() != '')">
@@ -43,12 +43,14 @@
       </a>
     </div>
     <div *ngIf="this.tokenService.getRefreshTokenFromStorage() == '' || this.tokenService.getTokenFromStorage() == ''" class="pal">
-      <button routerLink="/login" style="outline:none;" mat-icon-button>
+      <button routerLink="/login" style="outline:none;" mat-button>
+        Ingresar
         <mat-icon class="black">login</mat-icon>
       </button>
     </div>
     <div *ngIf="this.tokenService.getRefreshTokenFromStorage() == '' || this.tokenService.getTokenFromStorage() == ''" class="pal">
-      <button routerLink="/register" style="outline:none;" mat-icon-button>
+      <button routerLink="/register" style="outline:none;" mat-button>
+        Registrarse
         <mat-icon class="black">how_to_reg</mat-icon>
       </button>
   </div>
